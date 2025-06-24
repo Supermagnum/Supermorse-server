@@ -46,7 +46,7 @@ This repository contains a modified version of the Mumble server (Murmur) specif
 
 ```bash
 # Clone the repository
-git clone https://github.com/Supermagnum/supermorse-mumble.git
+git clone https://github.com/Supermagnum/Supermorse-server.git
 cd supermorse-mumble
 
 # Build the server
@@ -57,7 +57,7 @@ cd supermorse-mumble
 
 ```batch
 # Clone the repository
-git clone https://github.com/Supermagnum/supermorse-mumble.git
+git clone https://github.com/Supermagnum/Supermorse-server.git
 cd supermorse-mumble
 
 # Build the server
