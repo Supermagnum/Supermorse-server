@@ -169,6 +169,125 @@ Command-line options:
 - `-c, --config <file>`: Specify the configuration file to use
 - `-d, --database <file>`: Specify the database file to use
 
+## Testing the Server Features
+
+To verify that all features of the modified Mumble server are working correctly, you can use the following testing procedures with the SuperMorse application.
+
+### Prerequisites for Testing
+
+1. **Build and run the server** using the instructions above
+2. **Prepare the SuperMorse app**:
+   - Ensure you have the latest version of the SuperMorse app from https://github.com/Supermagnum/supermorse-app
+   - Create a user account with 100% mastery of the International Morse alphabet, numbers, and prosigns
+   - If testing only, you can temporarily modify the `connect()` method in `murmur.js` to bypass the mastery check
+
+### Basic Connection Testing
+
+1. Launch the SuperMorse app with `npm run dev`
+2. Navigate to the Murmur communication interface
+3. Enter your server address (e.g., `localhost` or the IP address with port)
+4. Click the "Connect" button
+5. Verify that:
+   - The connection status changes to "Connected"
+   - The server status indicator turns green
+   - The channels dropdown populates with HF bands
+
+### Channel/Band Switching Testing
+
+1. After connecting, use the channel/band dropdown selector
+2. Select different HF bands (e.g., 20m, 40m, 80m)
+3. Verify that:
+   - The current band display updates accordingly
+   - The propagation quality indicator changes based on the selected band
+   - The system message confirms you've joined the new channel
+
+### Messaging Testing
+
+1. Type a Morse message in the input field
+2. Send the message using the send button or Enter key
+3. Verify that:
+   - The message appears in your message display
+   - The message includes your callsign/username and timestamp
+   - If another client is connected, verify they receive the message
+
+### User/Station Tracking Testing
+
+1. Connect with multiple clients if possible
+2. Verify that:
+   - The stations list populates with connected users
+   - Each station shows the correct callsign and channel/band
+   - Selecting a station attempts to join their channel
+   - Stations update when users change channels
+
+### Propagation Simulation Testing
+
+1. Switch between different HF bands
+2. Observe the propagation quality indicator
+3. Test at different times of day to see how the simulated propagation changes
+4. Verify the propagation conditions affect:
+   - The propagation quality indicator level (1-5)
+   - The ability to communicate between stations at different distances
+   - The recommended bands for your current conditions
+
+### Advanced Testing with Multiple Clients
+
+For more thorough testing, set up multiple clients:
+
+1. Run the SuperMorse app on multiple computers connected to the same server
+2. Configure each client with different Maidenhead grid locators (in settings)
+3. Test how distance affects:
+   - Propagation between different bands
+   - Signal quality between stations
+   - Band recommendations
+4. Test in different propagation conditions by adjusting the server's `solar_flux_index` and `k_index` values in the configuration file
+
+### Testing Propagation Configuration
+
+To test how different propagation conditions affect the simulation:
+
+1. Stop the server
+2. Edit the `config/mumble-server.ini` file
+3. Modify the `[hf_propagation]` section values:
+   - Set `solar_flux_index` to different values (60-300)
+   - Set `k_index` to different values (0-9)
+4. Restart the server and observe the changes in propagation
+
+### Manual API Testing
+
+For developers, you can test the IPC methods directly from the SuperMorse app's DevTools console (when running in dev mode):
+
+```javascript
+// Test connection
+window.electronAPI.connectMumble('localhost', {
+  username: 'TestUser',
+  channelName: '20m'
+}).then(console.log);
+
+// Test sending a message
+window.electronAPI.sendMumbleMessage('CQ CQ DE TEST').then(console.log);
+
+// Test getting channels
+window.electronAPI.getMumbleChannels().then(console.log);
+
+// Test getting users
+window.electronAPI.getMumbleUsers().then(console.log);
+```
+
+### Troubleshooting
+
+If you encounter connection issues:
+
+1. Check the server is running and accessible (try pinging the server)
+2. Verify the server port is open and not blocked by a firewall
+3. Check certificates if using secure connection
+4. Look for error messages in:
+   - The server console output
+   - The SuperMorse app's DevTools console (press F12 in dev mode)
+5. Verify your user account has the required Morse code mastery levels
+6. Check the Maidenhead grid locator in your settings is valid
+
+By following this testing plan, you'll be able to verify all the features of the modified Mumble server integration in the SuperMorse app.
+
 ## How the HF Band Simulation Works
 
 ### Propagation Model
