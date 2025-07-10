@@ -217,6 +217,96 @@ float HFBandSimulation::calculatePropagation(ServerUser *user1, ServerUser *user
     return signalStrength;
 }
 
+float HFBandSimulation::getSignalQuality(ServerUser *user1, ServerUser *user2) {
+    // First get the base signal strength
+    float signalStrength = calculatePropagation(user1, user2);
+    
+    // If users are in the same channel, we apply a minimum quality threshold
+    // to ensure some level of communication is always possible
+    if (user1->cChannel == user2->cChannel) {
+        // Even in the same channel, signal quality can degrade somewhat for realism
+        return qMax(0.5f, signalStrength);
+    }
+    
+    // Get the band for each user's channel
+    int band1 = getChannelBand(user1->cChannel->iId);
+    int band2 = getChannelBand(user2->cChannel->iId);
+    
+    // If users are on the same band, apply standard quality calculation
+    if (band1 == band2 && band1 > 0) {
+        // Some minimum quality for same-band communication
+        return qMax(0.1f, signalStrength);
+    }
+    
+    // For cross-band communication, quality degrades more significantly
+    if (band1 > 0 && band2 > 0) {
+        // Calculate frequency ratio for cross-band harmonic effects
+        float freq1 = bandToFrequency(band1);
+        float freq2 = bandToFrequency(band2);
+        float freqRatio = qMax(freq1, freq2) / qMin(freq1, freq2);
+        
+        // If frequencies are harmonically related, some communication is possible
+        if (freqRatio < 2.0f) {
+            return signalStrength * 0.6f; // 60% quality for related bands
+        }
+        
+        return signalStrength * 0.3f; // 30% quality for unrelated bands
+    }
+    
+    // If either user is not on a band channel, minimal quality
+    return signalStrength * 0.1f;
+}
+
+void HFBandSimulation::getFadingEffects(float signalStrength, float &packetLoss, float &jitter, float &noiseFactor) {
+    QMutexLocker locker(&m_mutex);
+    
+    // Scale and invert signal strength to get base degradation factor
+    // 1.0 signal = 0.0 degradation, 0.0 signal = 1.0 degradation
+    float baseDegradation = 1.0f - signalStrength;
+    
+    // Add some randomness to simulate propagation variations
+    float randomFactor = 0.8f + (QRandomGenerator::global()->generateDouble() * 0.4f);
+    baseDegradation *= randomFactor;
+    
+    // Ensure degradation is in valid range
+    baseDegradation = qBound(0.0f, baseDegradation, 1.0f);
+    
+    // Calculate packet loss - increases rapidly as signal degrades
+    // Signal fading in HF often manifests as complete dropouts
+    packetLoss = qPow(baseDegradation, 1.5f); // Non-linear curve
+    
+    // Add randomization to packet loss to simulate fading
+    packetLoss *= (0.8f + (QRandomGenerator::global()->generateDouble() * 0.4f));
+    packetLoss = qBound(0.0f, packetLoss, 0.95f); // Max 95% packet loss
+    
+    // Calculate jitter - increases with signal degradation
+    // Models timing variations in received signal
+    jitter = baseDegradation * 0.8f;
+    jitter = qBound(0.0f, jitter, 0.9f);
+    
+    // Calculate noise factor - increases with signal degradation
+    // Models static, atmospheric noise, and interference
+    noiseFactor = qPow(baseDegradation, 0.8f); // Less aggressive curve
+    
+    // Solar and geomagnetic activity affect noise levels
+    if (m_kIndex > 5) {
+        // High geomagnetic activity increases noise
+        noiseFactor += 0.2f * (m_kIndex - 5) / 4.0f;
+    }
+    
+    // Time of day affects noise (more noise at night on lower bands)
+    QDateTime now = QDateTime::currentDateTime();
+    int hour = now.time().hour();
+    bool isNighttime = (hour < 6 || hour > 18);
+    
+    if (isNighttime) {
+        // Increased atmospheric noise at night
+        noiseFactor += 0.15f;
+    }
+    
+    noiseFactor = qBound(0.0f, noiseFactor, 0.95f); // Max 95% noise
+}
+
 bool HFBandSimulation::canCommunicate(ServerUser *user1, ServerUser *user2) {
     QMutexLocker locker(&m_mutex);
     

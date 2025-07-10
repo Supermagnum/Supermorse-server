@@ -67,10 +67,34 @@ public:
      * @return The signal strength between the users (0.0 to 1.0)
      */
     float calculatePropagation(ServerUser *user1, ServerUser *user2);
+    
+    /**
+     * @brief Get the signal quality between two users.
+     * 
+     * The signal quality is used for graduated signal fading effects.
+     * It ranges from 0.0 (no communication) to 1.0 (perfect signal).
+     * 
+     * @param user1 The first user
+     * @param user2 The second user
+     * @return The signal quality factor (0.0 to 1.0)
+     */
+    float getSignalQuality(ServerUser *user1, ServerUser *user2);
+    
+    /**
+     * @brief Get the fading effects for a given signal strength.
+     * 
+     * Calculates various audio degradation parameters based on signal strength.
+     * 
+     * @param signalStrength The signal strength (0.0 to 1.0)
+     * @param packetLoss Output parameter for packet loss percentage (0.0 to 1.0)
+     * @param jitter Output parameter for jitter amount (0.0 to 1.0)
+     * @param noiseFactor Output parameter for noise level (0.0 to 1.0)
+     */
+    void getFadingEffects(float signalStrength, float &packetLoss, float &jitter, float &noiseFactor);
 
     /**
      * @brief Determine if two users can communicate.
-     * 
+     *
      * @param user1 The first user
      * @param user2 The second user
      * @return True if communication is possible, false otherwise

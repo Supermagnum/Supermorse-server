@@ -256,6 +256,7 @@ public slots:
 signals:
 	void reqSync(unsigned int);
 	void tcpTransmit(QByteArray, unsigned int id);
+	void signalQualityChanged(unsigned int userSession1, unsigned int userSession2, float quality);
 
 public:
 	unsigned int iServerNum;

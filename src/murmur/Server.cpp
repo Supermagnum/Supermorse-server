@@ -354,32 +354,76 @@ void Server::updateHFBandPropagation() {
 void Server::updateAudioRouting(ServerUser *u1, ServerUser *u2) {
     // Update the audio routing between two users based on propagation
     
-    // Check if the users can communicate
-    bool canTalk = canCommunicate(u1, u2);
+    // Get the signal quality between the users (graduated scale, not binary)
+    float signalQuality = m_hfBandSimulation.getSignalQuality(u1, u2);
     
-    // Get the signal strength between the users
+    // Get the users' grid locators
     QString grid1 = u1->qsMetadata.value("maidenheadgrid", "").toString();
     QString grid2 = u2->qsMetadata.value("maidenheadgrid", "").toString();
     
     if (!grid1.isEmpty() && !grid2.isEmpty()) {
-        float strength = calculateSignalStrength(grid1, grid2);
+        // Calculate fading effects based on signal quality
+        float packetLoss = 0.0f;
+        float jitter = 0.0f;
+        float noiseFactor = 0.0f;
         
-        // Log the audio routing update
+        m_hfBandSimulation.getFadingEffects(signalQuality, packetLoss, jitter, noiseFactor);
+        
+        // Log the audio routing update with detailed signal metrics
         qWarning() << "Audio routing between" << u1->qsName << "and" << u2->qsName
-                  << ": Can communicate:" << canTalk << ", Signal strength:" << strength;
+                  << ": Signal quality:" << signalQuality 
+                  << ", Packet loss:" << packetLoss * 100.0f << "%"
+                  << ", Jitter:" << jitter
+                  << ", Noise:" << noiseFactor;
         
-        // In a real implementation, this would update the audio routing
-        // between the users based on the propagation
+        // Apply graduated audio degradation effects
+        // In a real implementation, this would modify audio packets in the transmission pipeline
         
-        // For this implementation, we'll just simulate signal fading
-        // based on the signal strength
-        if (canTalk) {
-            // Apply signal fading based on strength
-            // This would be done in the audio processing pipeline
-            // For now, we'll just log it
-            qWarning() << "Applying signal fading of" << (1.0f - strength) * 100.0f << "% between"
+        // 1. Determine if we should block audio completely (very poor signal)
+        bool blockAudio = (signalQuality < 0.05f);
+        
+        if (blockAudio) {
+            // Signal too weak for any communication
+            qWarning() << "Signal too weak, blocking audio between" 
                       << u1->qsName << "and" << u2->qsName;
+            
+            // In a real implementation, this would prevent audio packets from being transmitted
+            return;
         }
+        
+        // 2. Apply packet loss simulation (signal dropouts)
+        bool applyPacketLoss = (QRandomGenerator::global()->generateDouble() < packetLoss);
+        if (applyPacketLoss) {
+            // Randomly drop this audio update to simulate fading
+            qWarning() << "Simulating packet loss between" 
+                      << u1->qsName << "and" << u2->qsName;
+            
+            // In a real implementation, this would randomly drop audio packets
+            // For now, we just simulate the behavior
+        }
+        
+        // 3. Apply noise to the audio signal
+        if (noiseFactor > 0.1f) {
+            qWarning() << "Adding" << noiseFactor * 100.0f 
+                      << "% noise to audio between"
+                      << u1->qsName << "and" << u2->qsName;
+            
+            // In a real implementation, this would add white noise to audio samples
+            // The intensity would be proportional to the noise factor
+        }
+        
+        // 4. Apply jitter effects (timing variations)
+        if (jitter > 0.2f) {
+            qWarning() << "Adding jitter factor" << jitter 
+                      << " to audio between"
+                      << u1->qsName << "and" << u2->qsName;
+            
+            // In a real implementation, this would vary packet timing
+            // and potentially reorder packets to simulate propagation variations
+        }
+        
+        // Emit a signal to notify clients about the signal quality
+        emit signalQualityChanged(u1->uiSession, u2->uiSession, signalQuality);
     }
 }
 
