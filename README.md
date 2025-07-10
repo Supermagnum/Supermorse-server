@@ -350,6 +350,11 @@ Users receive recommendations when they connect and when propagation conditions 
 
 This modified Mumble server is designed to work with the Supermorse application. The Supermorse application can start and stop this server programmatically and uses it for voice communication and HF simulation.
 
+## For future implementanion
+When the user has spent xx hours doing simulated Morse contacts, unlock SSB ”channels“ per this bandplan.
+Unsure if it's possible to add a frequency dial in the GUI,and if a used servers hardware can handle the load.
+https://github.com/Supermagnum/Supermorse-server/blob/main/Bandplans/band_segments.csv
+
 ## License
 
 This project is based on Mumble, which is licensed under the BSD license. See the [LICENSE](LICENSE) file for details.
