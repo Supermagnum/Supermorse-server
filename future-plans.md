@@ -24,6 +24,10 @@ Audio filtering: Bandpass filters simulate the narrow bandwidth typical of SSB c
 Support for rotateable antennas, and stationary antennas like Yagi,loop, ground plane 1/4 wave, endfed.
 
 
+Bandplans and antennas can be found in:
+https://github.com/Supermagnum/Supermorse-server/tree/main/Bandplans_and_antennas
+
+
 4NEC2 Pattern File Support ( these provides antenna gain patterns)
 Antennas described in this folder needs to be simulated to get relevant data.
 

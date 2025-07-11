@@ -288,6 +288,23 @@ If you encounter connection issues:
 
 By following this testing plan, you'll be able to verify all the features of the modified Mumble server integration in the SuperMorse app.
 
+## Project Structure
+
+### Modular Architecture
+
+The server uses a modular architecture to separate concerns and improve maintainability:
+
+- **Module Interface**: The `IServerModule` interface defines the contract for all server modules
+- **Module Manager**: The `ModuleManager` class handles registration and lifecycle of modules
+- **Modules Directory**: All module-related files are organized in the `src/murmur/modules` directory:
+  - `IServerModule.h` - Base interface for all modules
+  - `ModuleManager.h/cpp` - Module registration and management
+  - `UserDataModule.h/cpp` - User authentication and data management
+  - `PropagationModule.h/cpp` - HF propagation simulation
+  - `HFBandSimulation.h/cpp` - Core simulation engine
+
+This organization makes it easy to add new modules or modify existing ones without affecting other parts of the system.
+
 ## How the HF Band Simulation Works
 
 ### Propagation Model
@@ -354,6 +371,9 @@ This modified Mumble server is designed to work with the Supermorse application.
 When the user has spent xx hours doing simulated Morse contacts, unlock SSB ”channels“ per this bandplan.
 Unsure if it's possible to add a frequency dial in the GUI,and if a used servers hardware can handle the load.
 https://github.com/Supermagnum/Supermorse-server/blob/main/Bandplans/band_segments.csv
+
+Also read:
+https://github.com/Supermagnum/Supermorse-server/blob/main/future-plans.md
 
 ## License
 

@@ -58,8 +58,8 @@
 #include <vector>
 
 // Modular architecture
-#include "ModuleManager.h"
-#include "HFBandSimulation.h"
+#include "modules/ModuleManager.h"
+#include "modules/HFBandSimulation.h"
 
 class Zeroconf;
 class Channel;

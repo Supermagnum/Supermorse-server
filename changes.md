@@ -86,7 +86,13 @@ packetLoss = qBound(0.0f, packetLoss, 0.95f); // Max 95% packet loss
 
 These changes make the fading sound more natural and realistic while maintaining appropriate overall signal degradation based on the base parameters. The sinusoidal components with varying periods, combined with the random elements and probabilistic deep fades, create a much more authentic representation of how HF signals actually behave in real-world conditions.
 
-# Modular Server Architecture - 2025-07-11
+# Module Reorganization - 2025-07-11
+
+## Overview
+
+Organized all module-related files into a dedicated `modules` directory within the `src/murmur` directory. This improves project structure and maintainability by grouping related files together and making the module system more explicit in the codebase.
+
+# Modular Server Architecture - 2025-07-10
 
 ## Overview
 

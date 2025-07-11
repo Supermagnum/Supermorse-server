@@ -28,14 +28,21 @@ endif()
 set(SOURCES
     main.cpp
     Server.cpp
-    HFBandSimulation.cpp
     ServerApplication.cpp
+    modules/IServerModule.h
+    modules/ModuleManager.cpp
+    modules/ModuleManager.h
+    modules/UserDataModule.cpp
+    modules/UserDataModule.h
+    modules/PropagationModule.cpp
+    modules/PropagationModule.h
+    modules/HFBandSimulation.cpp
+    modules/HFBandSimulation.h
 )
 
 # Define the header files
 set(HEADERS
     Server.h
-    HFBandSimulation.h
     ServerApplication.h
 )
 

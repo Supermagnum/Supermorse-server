@@ -4,8 +4,8 @@
 // Mumble source tree or at <https://www.mumble.info/LICENSE>.
 
 #include "Server.h"
-#include "UserDataModule.h"
-#include "PropagationModule.h"
+#include "modules/UserDataModule.h"
+#include "modules/PropagationModule.h"
 #include "database/MariaDBConnectionParameter.h"
 
 #include <QtCore/QCoreApplication>
