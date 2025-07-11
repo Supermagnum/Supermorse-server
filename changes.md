@@ -85,3 +85,149 @@ packetLoss = qBound(0.0f, packetLoss, 0.95f); // Max 95% packet loss
    - Weighted combination of components for realistic fading behavior
 
 These changes make the fading sound more natural and realistic while maintaining appropriate overall signal degradation based on the base parameters. The sinusoidal components with varying periods, combined with the random elements and probabilistic deep fades, create a much more authentic representation of how HF signals actually behave in real-world conditions.
+
+# Modular Server Architecture - 2025-07-11
+
+## Overview
+
+Refactored the server to use a modular architecture with separate modules for user data handling and propagation simulation. This makes the code more maintainable and extensible by clearly separating concerns and making it easy to add new modules in the future.
+
+## Previous Implementation
+
+The original implementation had all functionality directly integrated into the Server class:
+
+```cpp
+// Server.h
+class Server : public QThread {
+private:
+    // Direct integration of HF band simulation
+    HFBandSimulation m_hfBandSimulation;
+    
+    // User data handling mixed with other server functionality
+    void processUserData();
+    // ...other methods...
+};
+```
+
+This tight coupling made it difficult to extend the server with new functionality and created maintenance challenges when updating specific components.
+
+## New Implementation
+
+The new implementation uses a module-based architecture with these components:
+
+1. **Module Interface** - Defines the contract for all server modules:
+
+```cpp
+// IServerModule.h
+class IServerModule {
+public:
+    virtual ~IServerModule() = default;
+    virtual bool initialize() = 0;
+    virtual void cleanup() = 0;
+    virtual QString name() const = 0;
+};
+```
+
+2. **Module Manager** - Handles registration and coordination of modules:
+
+```cpp
+// ModuleManager.h
+class ModuleManager : public QObject {
+private:
+    QHash<QString, IServerModule*> m_modules;
+    
+public:
+    bool registerModule(IServerModule* module);
+    IServerModule* getModule(const QString& name);
+    bool initializeModules();
+    void cleanupModules();
+};
+```
+
+3. **Specialized Modules** - User data and propagation simulation:
+
+```cpp
+// UserDataModule.h
+class UserDataModule : public QObject, public IServerModule {
+public:
+    bool initialize() override;
+    void cleanup() override;
+    QString name() const override { return "UserData"; }
+    
+    // User data specific functionality
+    // ...
+};
+
+// PropagationModule.h
+class PropagationModule : public QObject, public IServerModule {
+private:
+    HFBandSimulation* m_simulation;
+    
+public:
+    bool initialize() override;
+    void cleanup() override;
+    QString name() const override { return "Propagation"; }
+    
+    // Access to the HF band simulation
+    HFBandSimulation* getSimulation() const { return m_simulation; }
+};
+```
+
+4. **Updated Server Class** - Now uses modules instead of direct implementation:
+
+```cpp
+// Server.h
+class Server : public QThread {
+private:
+    ModuleManager* m_moduleManager;
+    HFBandSimulation* m_pHFBandSimulation; // Pointer for backward compatibility
+    
+    // ...
+};
+
+// Server.cpp
+bool Server::initialize() {
+    // Initialize module manager
+    m_moduleManager = new ModuleManager(this);
+    
+    // Register modules
+    m_moduleManager->registerModule(new UserDataModule(this));
+    m_moduleManager->registerModule(new PropagationModule(this));
+    
+    // Initialize all modules
+    if (!m_moduleManager->initializeModules()) {
+        return false;
+    }
+    
+    // Get propagation module for backward compatibility
+    PropagationModule* propModule = 
+        static_cast<PropagationModule*>(m_moduleManager->getModule("Propagation"));
+    if (propModule) {
+        m_pHFBandSimulation = propModule->getSimulation();
+    }
+    
+    return true;
+}
+```
+
+## Key Improvements
+
+1. **Separation of Concerns**:
+   - Each module has a clearly defined responsibility
+   - User data handling and propagation simulation are now independent
+
+2. **Improved Extensibility**:
+   - New functionality can be added by creating new modules
+   - Existing modules can be enhanced without affecting others
+
+3. **Better Maintainability**:
+   - Smaller, focused components are easier to understand and maintain
+   - Changes to one module don't require changes to others
+
+4. **Backward Compatibility**:
+   - Server maintains the same interface for client code
+   - Existing functionality continues to work as before
+
+5. **Future-Proof Architecture**:
+   - Framework for adding new radio features, security modules, etc.
+   - Clear pathway for continuing development of the server

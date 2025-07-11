@@ -57,7 +57,8 @@
 #include <optional>
 #include <vector>
 
-// SuperMorse HF Band Simulation Features
+// Modular architecture
+#include "ModuleManager.h"
 #include "HFBandSimulation.h"
 
 class Zeroconf;
@@ -195,8 +196,12 @@ public:
 	Mumble::Protocol::UDPAudioEncoder< Mumble::Protocol::Role::Server > m_udpAudioEncoder;
 	Mumble::Protocol::UDPAudioEncoder< Mumble::Protocol::Role::Server > m_tcpAudioEncoder;
 
-	// SuperMorse HF Band Simulation
-	HFBandSimulation m_hfBandSimulation;
+	// Module manager for the modular architecture
+	ModuleManager *m_moduleManager;
+	
+	// HF Band Simulation - backward compatibility pointer
+	// This will be managed by the PropagationModule
+	HFBandSimulation *m_pHFBandSimulation;
 
 	gsl::span< const Mumble::Protocol::byte >
 		handlePing(const Mumble::Protocol::UDPDecoder< Mumble::Protocol::Role::Server > &decoder,
