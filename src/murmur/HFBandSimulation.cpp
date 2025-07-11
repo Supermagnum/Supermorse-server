@@ -271,12 +271,39 @@ void HFBandSimulation::getFadingEffects(float signalStrength, float &packetLoss,
     // Ensure degradation is in valid range
     baseDegradation = qBound(0.0f, baseDegradation, 1.0f);
     
-    // Calculate packet loss - increases rapidly as signal degrades
-    // Signal fading in HF often manifests as complete dropouts
-    packetLoss = qPow(baseDegradation, 1.5f); // Non-linear curve
+    // Calculate packet loss - using multi-component fading model to sound more natural
+    // HF propagation has both slow fading and fast flutter components
     
-    // Add randomization to packet loss to simulate fading
-    packetLoss *= (0.8f + (QRandomGenerator::global()->generateDouble() * 0.4f));
+    // Get current time for time-based fading components
+    qint64 currentTimeMs = QDateTime::currentMSecsSinceEpoch();
+    
+    // Slow fading component (changes over seconds)
+    float slowFadePeriod = 5000.0f + (2000.0f * QRandomGenerator::global()->generateDouble()); // 5-7 seconds
+    float slowFadePhase = (currentTimeMs % static_cast<qint64>(slowFadePeriod)) / slowFadePeriod;
+    float slowFadeComponent = 0.5f * (1.0f + sin(2.0f * M_PI * slowFadePhase));
+    
+    // Fast fading/flutter component (rapid variations)
+    float fastFadePeriod = 100.0f + (300.0f * QRandomGenerator::global()->generateDouble()); // 100-400ms
+    float fastFadePhase = (currentTimeMs % static_cast<qint64>(fastFadePeriod)) / fastFadePeriod;
+    float fastFadeComponent = 0.3f * (1.0f + sin(2.0f * M_PI * fastFadePhase * 3.0f));
+    
+    // Random component for unpredictable variations
+    float randomComponent = 0.2f * QRandomGenerator::global()->generateDouble();
+    
+    // Calculate base packet loss from signal degradation (still non-linear)
+    float basePacketLoss = qPow(baseDegradation, 1.3f);
+    
+    // Occasional deep fades/dropouts (more likely with worse signals)
+    bool deepFade = QRandomGenerator::global()->generateDouble() < (0.05f + (0.15f * baseDegradation));
+    float deepFadeFactor = deepFade ? (0.7f + (0.3f * QRandomGenerator::global()->generateDouble())) : 0.0f;
+    
+    // Combine all components
+    packetLoss = basePacketLoss * (0.5f + (0.3f * slowFadeComponent) + 
+                                  (0.1f * fastFadeComponent) + 
+                                  randomComponent + 
+                                  deepFadeFactor);
+    
+    // Ensure packet loss is within valid range
     packetLoss = qBound(0.0f, packetLoss, 0.95f); // Max 95% packet loss
     
     // Calculate jitter - increases with signal degradation
