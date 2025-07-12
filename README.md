@@ -6,7 +6,7 @@ This repository contains a modified version of the Mumble server (Murmur) specif
 
 ### HF Band Channels
 - Channels corresponding to amateur radio frequencies (160m, 80m, 60m, 40m, 30m, 20m, 17m, 15m, 10m, 6m)
-- Channel descriptions with frequency ranges
+- Channel descriptions.
 - Channel links to simulate propagation overlap between bands
 
 ### Advanced Propagation Simulation
@@ -369,7 +369,8 @@ This modified Mumble server is designed to work with the Supermorse application.
 
 ## For Future Implementation
 When the user has spent xx hours doing simulated Morse contacts, unlock SSB "channels" per this bandplan.
-Unsure if it's possible to add a frequency dial in the GUI, and if a used server's hardware can handle the load.
+Add a frequency dial in the GUI,a used server's hardware can handle the load if it has the correct parts.
+Add support for GPU computing.
 https://github.com/Supermagnum/Supermorse-server/blob/main/Bandplans_and_antennas/band_segments.csv
 
 Also read:
