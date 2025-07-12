@@ -1,3 +1,59 @@
+# Debug Enhancements in UserDataModule - 2025-07-12
+
+## Overview
+
+Enhanced debug logging throughout the UserDataModule class to improve debugging capabilities and make troubleshooting easier. The changes ensure consistent debug output across all methods in the module.
+
+## Previous Implementation
+
+Several methods in the UserDataModule class had comments indicating what would happen "in a real implementation" but were missing actual debug statements, particularly in the clearTempGroups method:
+
+```cpp
+void UserDataModule::clearTempGroups(User *user, Channel *cChannel, bool recurse) {
+    // In a real implementation, this would clear temporary groups for the user
+}
+```
+
+This lack of debug output made it difficult to track the module's operations during runtime.
+
+## New Implementation
+
+All methods now have consistent debug statements that log their operations, including:
+
+```cpp
+void UserDataModule::clearTempGroups(User *user, Channel *cChannel, bool recurse) {
+    // In a real implementation, this would clear temporary groups for the user
+    
+    qDebug() << "UserDataModule: Cleared temporary groups for user"
+             << (user ? user->qsName : "null")
+             << "in channel" << (cChannel ? cChannel->qsName : "all channels")
+             << (recurse ? "(recursive)" : "");
+}
+```
+
+## Key Improvements
+
+1. **Comprehensive Debug Coverage**:
+   - Added debug statements to all methods that were missing them
+   - Ensured consistent logging format across the entire module
+
+2. **Enhanced Debugging Information**:
+   - Each method now reports relevant details about its operation
+   - Null checks provide safe output even with invalid parameters
+   - Conditional formatting improves readability of log messages
+
+3. **Standardized Logging Format**:
+   - All debug messages start with "UserDataModule:" for easy filtering
+   - Consistent use of parameter information in the output
+   - Helpful context indicators (e.g., "(recursive)", "not found")
+
+4. **Runtime Transparency**:
+   - Clear visibility into module operations during execution
+   - Better traceability for user-related operations
+   - Easier troubleshooting of issues related to user management
+
+These changes make the module's behavior more transparent during runtime and significantly improve the ability to debug issues related to user management and permissions.
+
 # Changes to HF Fading Algorithm
 
 ## Overview

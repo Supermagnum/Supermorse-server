@@ -53,6 +53,7 @@ QVariant UserDataModule::getSetting(const QString &key, const QVariant &defaultV
     
     // In a real implementation, this would read from a settings store
     // For this simplified version, we just return the default value
+    qDebug() << "UserDataModule: Getting setting" << key << "with default value" << defaultValue;
     return defaultValue;
 }
 
@@ -89,9 +90,11 @@ int UserDataModule::authenticate(QString &name, const QString &password, int ses
     if (userID > 0) {
         // User is registered, emit authentication signal
         emit userAuthenticated(userID, name);
+        qDebug() << "UserDataModule: Authenticated user" << name << "with ID" << userID;
         return userID;
     } else {
         // User is not registered, allow anonymous authentication
+        qDebug() << "UserDataModule: Anonymous authentication for user" << name;
         return -2; // -2 indicates unknown user (fallthrough)
     }
 }
@@ -185,14 +188,18 @@ QString UserDataModule::getRegisteredUserName(int userID) {
     QMutexLocker locker(&m_mutex);
     
     // Return the username from cache
-    return m_userNameCache.value(userID, QString());
+    QString name = m_userNameCache.value(userID, QString());
+    qDebug() << "UserDataModule: Retrieved username for user ID" << userID << ":" << (name.isEmpty() ? "not found" : name);
+    return name;
 }
 
 int UserDataModule::getRegisteredUserID(const QString &name) {
     QMutexLocker locker(&m_mutex);
     
     // Return the user ID from cache
-    return m_userIDCache.value(name, -1);
+    int userID = m_userIDCache.value(name, -1);
+    qDebug() << "UserDataModule: Retrieved user ID for name" << name << ":" << (userID > 0 ? QString::number(userID) : "not found");
+    return userID;
 }
 
 bool UserDataModule::setUserProperties(int userID, QMap<int, QString> properties) {
@@ -219,7 +226,9 @@ QMap<int, QString> UserDataModule::getUserProperties(int userID) {
     QMutexLocker locker(&m_mutex);
     
     // Return the properties from cache
-    return m_userPropertiesCache.value(userID, QMap<int, QString>());
+    QMap<int, QString> properties = m_userPropertiesCache.value(userID, QMap<int, QString>());
+    qDebug() << "UserDataModule: Retrieved" << properties.size() << "properties for user ID" << userID;
+    return properties;
 }
 
 std::vector<UserInfo> UserDataModule::getAllRegisteredUserProperties(QString nameSubstring) {
@@ -252,6 +261,9 @@ std::vector<UserInfo> UserDataModule::getAllRegisteredUserProperties(QString nam
         result.push_back(info);
     }
     
+    qDebug() << "UserDataModule: Retrieved properties for" << result.size() << "users matching substring" 
+             << (nameSubstring.isEmpty() ? "(all users)" : nameSubstring);
+    
     return result;
 }
 
@@ -276,6 +288,8 @@ bool UserDataModule::setComment(ServerUser &user, const QString &comment) {
     if (success) {
         // Update user's comment
         user.qsComment = comment;
+        qDebug() << "UserDataModule: Set comment for user" << user.qsName 
+                 << "ID" << user.iId << "comment length:" << comment.length();
     }
     
     return success;
@@ -297,6 +311,9 @@ void UserDataModule::loadComment(ServerUser &user) {
     
     // Set user's comment
     user.qsComment = comment;
+    
+    qDebug() << "UserDataModule: Loaded comment for user" << user.qsName 
+             << "ID" << user.iId << "comment length:" << comment.length();
 }
 
 bool UserDataModule::setTexture(ServerUser &user, const QByteArray &texture) {
@@ -319,6 +336,8 @@ bool UserDataModule::setTexture(ServerUser &user, const QByteArray &texture) {
     if (success) {
         // Update user's texture
         user.qbaTexture = texture;
+        qDebug() << "UserDataModule: Set texture for user" << user.qsName 
+                 << "ID" << user.iId << "texture size:" << texture.size() << "bytes";
     }
     
     return success;
@@ -352,6 +371,9 @@ void UserDataModule::loadTexture(ServerUser &user) {
     
     // Set user's texture
     user.qbaTexture = texture;
+    
+    qDebug() << "UserDataModule: Loaded texture for user" << user.qsName 
+             << "ID" << user.iId << "texture size:" << texture.size() << "bytes";
 }
 
 QByteArray UserDataModule::getTexture(int userID) {
@@ -360,6 +382,7 @@ QByteArray UserDataModule::getTexture(int userID) {
     // In a real implementation, this would retrieve the texture from the database
     
     // For this simplified version, we just return an empty texture
+    qDebug() << "UserDataModule: Retrieved texture for user ID" << userID << "(empty in this implementation)";
     return QByteArray();
 }
 
@@ -367,7 +390,9 @@ bool UserDataModule::isValidUserID(int userID) {
     QMutexLocker locker(&m_mutex);
     
     // Check if user exists in cache
-    return m_userNameCache.contains(userID);
+    bool isValid = m_userNameCache.contains(userID);
+    qDebug() << "UserDataModule: Checked if user ID" << userID << "is valid:" << (isValid ? "yes" : "no");
+    return isValid;
 }
 
 void UserDataModule::setTempGroups(int userid, int sessionId, Channel *cChannel, const QStringList &groups) {
