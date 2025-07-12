@@ -2,6 +2,9 @@
 
 This repository contains a modified version of the Mumble server (Murmur) specifically designed for the Supermorse application. The server includes special features for amateur radio simulation, including HF band channels and realistic propagation simulation.
 
+# Application link:
+https://github.com/Supermagnum/supermorse-app
+
 ## Features
 
 ### HF Band Channels
