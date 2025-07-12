@@ -23,20 +23,24 @@ Audio filtering: Bandpass filters simulate the narrow bandwidth typical of SSB c
 
 Support for rotateable antennas, and stationary antennas like Yagi,loop, ground plane 1/4 wave, endfed.
 
+All antennas 10 meters above average ground, as standard. If /MM is used, 1/4 GP 3m above sea lever or loop 30 meters above sea level.
 
-Bandplans and antennas can be found in:
+Power levels:
+50,100,150,200 etc up to 1000W.
+
+Bandplans and description of common antennas can be found in:
 https://github.com/Supermagnum/Supermorse-server/tree/main/Bandplans_and_antennas
-
 
 4NEC2 Pattern File Support ( these provides antenna gain patterns)
 Antennas described in this folder needs to be simulated to get relevant data.
-
 
 Native formats:
 
 NEC output files - 4NEC2 can export its calculated patterns as text files
 Radiation pattern data - Generated from your NEC geometry models
 Far-field pattern files - ASCII format with angle/gain data
+
+
 4NEC2 pattern exports typically include:
 
 Theta/Phi coordinates (spherical coordinates)
@@ -45,8 +49,10 @@ Frequency information
 Polarization components (vertical/horizontal)
 
 
-Hardware needed:
-PowerEdge R720 2X Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz 
+Minimum server hardware needed
+PowerEdge R720 2X Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz 8 cores and 16 threads per CPU
+64GB RAM
+
 GPU options:
 Tesla P40 (~$200-400 used)
 
@@ -58,13 +64,12 @@ Tesla P100 (~$400-800 used)
 Specs: 3584 CUDA cores, 16GB HBM2
 Power: 250W
 
-
-
 Tesla P4 (~$50-150 used),- 4X
 
 Specs: 2560 CUDA cores, 8GB GDDR5
 Power: 75W (no supplementary power needed)
 
+Similar commercial non server hardware can be used, but the non server GPU cards needs to have a plug in the HDMI connector to turn on.
 
 OS:
 Tesla P4 Setup (Ubuntu 20.04 LTS)
