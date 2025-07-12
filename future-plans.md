@@ -19,11 +19,13 @@ Implement a "tuning" control that adjusts the frequency offset in real-time
 
 Modulation simulation: USB (Upper Sideband) and LSB (Lower Sideband) single sideband modulation can be digitally generated using mathematical transformations like the Hilbert transform
 
-Audio filtering: Bandpass filters simulate the narrow bandwidth typical of SSB communications (roughly 2.4-3 kHz)
+Audio filtering: Bandpass filter simulate the narrow bandwidth typical of SSB communications (2.4kHz)
+
+CW filters: 500 or 250Hz Bandpass.
 
 Support for rotateable antennas, and stationary antennas like Yagi,loop, ground plane 1/4 wave, endfed.
 
-All antennas 10 meters above average ground, as standard. If /MM is used, 1/4 GP 3m above sea lever or loop 30 meters above sea level.
+All antennas 10 meters above average ground, as standard. If /MM is used, 1/4 GP 3m above sea level or loop 30 meters above sea level.
 
 Power levels:
 50,100,150,200 etc up to 1000W.
