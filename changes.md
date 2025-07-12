@@ -91,12 +91,12 @@ These changes make the fading sound more natural and realistic while maintaining
 ## Overview
 
 Organized all module-related files into a dedicated `modules` directory within the `src/murmur` directory. This improves project structure and maintainability by grouping related files together and making the module system more explicit in the codebase.
-
 # Modular Server Architecture - 2025-07-10
 
 ## Overview
 
 Refactored the server to use a modular architecture with separate modules for user data handling and propagation simulation. This makes the code more maintainable and extensible by clearly separating concerns and making it easy to add new modules in the future.
+It should also make debugging easier.
 
 ## Previous Implementation
 
