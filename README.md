@@ -12,6 +12,13 @@ https://github.com/Supermagnum/supermorse-app
 - Channel descriptions.
 - Channel links to simulate propagation overlap between bands
 
+### Mastery Type Restrictions
+- **Skill-Based Permissions**: Users who have only mastered listening/copying (not sending) are restricted from sending messages in HF band channels
+- **Listening-Only Mode**: Users who have only completed keyboard-based training can enter and listen in all channels but can only send messages in text_chat
+- **Server-Enforced Restrictions**: Access control lists (ACLs) ensure restrictions are properly enforced for all clients
+- **Training Method Tracking**: Custom metadata fields track whether users mastered Morse code through Arduino (sending) or keyboard (listening)
+- **Realistic Skill Representation**: Ensures that only users who have mastered physical keys can send in HF bands, better reflecting real amateur radio requirements
+
 ### Advanced Propagation Simulation
 - **Realistic HF Propagation Model**: Based on solar conditions, geomagnetic activity, and seasonal variations
 - **Solar Flux Index (SFI)**: Simulates the effect of solar activity on HF propagation
@@ -145,7 +152,7 @@ Channel links are used to simulate propagation overlap between bands:
 ```
 
 ### Custom Metadata Fields
-The server supports custom metadata fields for grid locators and preferred bands:
+The server supports custom metadata fields for grid locators, preferred bands, and mastery type:
 
 ```ini
 [metadata_fields]
@@ -154,7 +161,35 @@ maidenheadgrid=text
 
 ; Preferred HF band
 preferredhfband=select:160,80,60,40,30,20,17,15,10,6
+
+; Flag to indicate user has only mastered listening (keyboard-only training)
+listeningOnly=bool
 ```
+
+### Access Control Configuration
+The server uses access control lists (ACLs) to restrict permissions based on user metadata:
+
+```ini
+[acl]
+; Define custom groups
+; listening-only group for users who only completed keyboard training
+~listeningonly=listeningOnly:true
+
+; HF band channels (1-10)
+; Listening-only users can enter and listen but not speak or send text messages
+1=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+2=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+3=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+4=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+5=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+6=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+7=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+8=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+9=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+10=~listeningonly:+enter,+traverse,-speak,-whisper,-textmessage
+```
+
+These settings ensure that users who have only mastered listening (keyboard-only training) can join and listen in HF band channels but cannot send messages. This reflects the real-world skill difference between being able to copy/receive Morse code versus being able to send it with a physical key.
 
 ## Running the Server
 
