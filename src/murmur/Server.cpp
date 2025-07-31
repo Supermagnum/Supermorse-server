@@ -6,6 +6,7 @@
 #include "Server.h"
 #include "modules/UserDataModule.h"
 #include "modules/PropagationModule.h"
+#include "modules/UserStatisticsModule.h"
 #include "database/MariaDBConnectionParameter.h"
 
 #include <QtCore/QCoreApplication>
@@ -67,6 +68,10 @@ void Server::registerModules() {
     // Create and register the propagation module
     PropagationModule *propagationModule = new PropagationModule(this);
     m_moduleManager->registerModule(propagationModule);
+    
+    // Create and register the user statistics module
+    UserStatisticsModule *userStatsModule = new UserStatisticsModule(this);
+    m_moduleManager->registerModule(userStatsModule);
     
     qDebug() << "Server: Registered modules:" << m_moduleManager->getModuleNames().join(", ");
 }

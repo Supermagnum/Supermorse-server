@@ -38,6 +38,8 @@ set(SOURCES
     modules/PropagationModule.h
     modules/HFBandSimulation.cpp
     modules/HFBandSimulation.h
+    modules/UserStatisticsModule.cpp
+    modules/UserStatisticsModule.h
 )
 
 # Define the header files
