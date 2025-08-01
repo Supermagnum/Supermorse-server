@@ -19,12 +19,15 @@
 #include "DBWrapper.h"
 #include "HostAddress.h"
 #include "Mumble.pb.h"
+#include "MumbleMessages.h"
 #include "MumbleProtocol.h"
 #include "QtUtils.h"
 #include "Timer.h"
 #include "User.h"
 #include "Version.h"
 #include "VolumeAdjustment.h"
+#include "WhisperTarget.h"
+#include "gsl.h"
 
 #include "database/ConnectionParameter.h"
 
@@ -37,6 +40,7 @@
 #include <QtCore/QQueue>
 #include <QtCore/QReadWriteLock>
 #include <QtCore/QRegularExpression>
+#include <QtCore/QSettings>
 #include <QtCore/QSocketNotifier>
 #include <QtCore/QStringList>
 #include <QtCore/QThread>
@@ -62,7 +66,7 @@
 #include "modules/HFBandSimulation.h"
 
 class Zeroconf;
-class Channel;
+#include "Channel.h"
 class PacketDataStream;
 class ServerUser;
 class User;
@@ -357,11 +361,11 @@ public:
 	void clearACLCache(User *p = nullptr);
 	void clearWhisperTargetCache();
 
-	void sendProtoAll(const ::google::protobuf::Message &msg, Mumble::Protocol::TCPMessageType type,
+	void sendProtoAll(const MumbleProto::Message &msg, Mumble::Protocol::TCPMessageType type,
 					  Version::full_t version, Version::CompareMode mode);
-	void sendProtoExcept(ServerUser *, const ::google::protobuf::Message &msg, Mumble::Protocol::TCPMessageType type,
+	void sendProtoExcept(ServerUser *, const MumbleProto::Message &msg, Mumble::Protocol::TCPMessageType type,
 						 Version::full_t version, Version::CompareMode mode);
-	void sendProtoMessage(ServerUser *, const ::google::protobuf::Message &msg, Mumble::Protocol::TCPMessageType type);
+	void sendProtoMessage(ServerUser *, const MumbleProto::Message &msg, Mumble::Protocol::TCPMessageType type);
 
 	// sendAll sends a protobuf message to all users on the server whose version is either bigger than v or
 	// lower than ~v. If v == 0 the message is sent to everyone.
@@ -454,10 +458,15 @@ public:
 	/// user on this server.
 	bool isValidUserID(int userID);
 
+	// Initialization methods
+	void initialize();
+	void registerModules();
+	void setupChannels(QSettings &qs);
+	
 	// SuperMorse HF Band Simulation Methods
 	void initializeHFBandSimulation();
 	void updateHFBandPropagation();
-	void calculatePropagation(ServerUser *user1, ServerUser *user2);
+	float calculatePropagation(ServerUser *user1, ServerUser *user2);
 	bool canCommunicate(ServerUser *user1, ServerUser *user2);
 	float calculateSignalStrength(const QString &grid1, const QString &grid2);
 	int recommendBand(float distance);

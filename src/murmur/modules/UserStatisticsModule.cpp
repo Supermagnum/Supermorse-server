@@ -54,7 +54,7 @@ QString UserStatisticsModule::description() const {
 }
 
 QVariant UserStatisticsModule::getSetting(const QString &key, const QVariant &defaultValue) const {
-    QMutexLocker locker(&m_mutex);
+    QMutexLocker locker(const_cast<QRecursiveMutex *>(&m_mutex));
     
     // Handle specific settings
     if (key == "statsDirectoryPath") {
@@ -95,7 +95,7 @@ void UserStatisticsModule::shutdown() {
 }
 
 QString UserStatisticsModule::getStatsDirectoryPath() const {
-    QMutexLocker locker(&m_mutex);
+    QMutexLocker locker(const_cast<QRecursiveMutex *>(&m_mutex));
     return m_statsDirectory.absolutePath();
 }
 
@@ -148,7 +148,7 @@ bool UserStatisticsModule::processUserStatsFile(const QString &userName, const Q
 }
 
 bool UserStatisticsModule::hasUserStats(const QString &userName) const {
-    QMutexLocker locker(&m_mutex);
+    QMutexLocker locker(const_cast<QRecursiveMutex *>(&m_mutex));
     
     QString userDirPath = m_statsDirectory.absolutePath() + "/" + userName;
     QDir userDir(userDirPath);
@@ -157,7 +157,7 @@ bool UserStatisticsModule::hasUserStats(const QString &userName) const {
 }
 
 QStringList UserStatisticsModule::getUserStatsFiles(const QString &userName) const {
-    QMutexLocker locker(&m_mutex);
+    QMutexLocker locker(const_cast<QRecursiveMutex *>(&m_mutex));
     
     QString userDirPath = m_statsDirectory.absolutePath() + "/" + userName;
     QDir userDir(userDirPath);

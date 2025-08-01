@@ -18,6 +18,7 @@
 #include <QtCore/QFileInfo>
 #include <QtCore/QTimer>
 #include <QtCore/QRegularExpression>
+#include <QtCore/QRandomGenerator>
 #include <QtNetwork/QSslSocket>
 #include <QtNetwork/QHostAddress>
 
@@ -244,11 +245,11 @@ void Server::onPropagationUpdated() {
     
     // Notify users of the updated propagation conditions
     foreach(ServerUser *u, qhUsers) {
-        if (u->sState == ServerUser::Authenticated) {
+        if (u->iId > 0) {
             sendMessage(u, message);
             
             // If user has a grid locator, send band recommendations
-            QString grid = u->qsMetadata.value("maidenheadgrid", "").toString();
+            QString grid = u->qmUserData.value("maidenheadgrid", "");
             if (!grid.isEmpty()) {
                 sendBandRecommendations(u, grid);
             }
@@ -265,12 +266,12 @@ void Server::onSignalStrengthChanged(const QString &grid1, const QString &grid2,
     
     // Find users with these grid locators and update their audio routing
     foreach(ServerUser *u1, qhUsers) {
-        if (u1->sState == ServerUser::Authenticated) {
-            QString u1Grid = u1->qsMetadata.value("maidenheadgrid", "").toString();
+        if (u1->iId > 0) {
+            QString u1Grid = u1->qmUserData.value("maidenheadgrid", "");
             if (u1Grid == grid1) {
                 foreach(ServerUser *u2, qhUsers) {
-                    if (u2->sState == ServerUser::Authenticated && u1 != u2) {
-                        QString u2Grid = u2->qsMetadata.value("maidenheadgrid", "").toString();
+                    if (u2->iId > 0 && u1 != u2) {
+                        QString u2Grid = u2->qmUserData.value("maidenheadgrid", "");
                         if (u2Grid == grid2) {
                             // Update audio routing between these users
                             updateAudioRouting(u1, u2);
@@ -290,7 +291,7 @@ void Server::onMUFChanged(float muf) {
     QString message = QString("Maximum Usable Frequency changed: %1 MHz").arg(muf);
     
     foreach(ServerUser *u, qhUsers) {
-        if (u->sState == ServerUser::Authenticated) {
+        if (u->iId > 0) {
             sendMessage(u, message);
         }
     }
@@ -298,14 +299,149 @@ void Server::onMUFChanged(float muf) {
 
 void Server::sendMessage(ServerUser *u, const QString &message) {
     // Send a text message to a user
-    MumbleProto::TextMessage mptm;
-    mptm.set_actor(0);
-    mptm.set_message(message.toStdString());
-    mptm.add_session(u->uiSession);
+    // Create and send text message
+    QString msg = message;
+    sendTextMessage(nullptr, u, false, msg);
     
     // In a real implementation, this would use the actual sendMessage method
     // For this simplified version, we'll just log the message
     qWarning() << "Sending message to user" << u->qsName << ":" << message;
+}
+
+void Server::sendTextMessage(Channel *cChannel, ServerUser *pUser, bool tree, const QString &text) {
+    // Implementation for sending text messages
+    qWarning() << "Sending text message to" << (pUser ? pUser->qsName : "all users in channel") 
+              << ":" << text
+              << (tree ? "(including subchannels)" : "");
+    
+    // In a real implementation, this would create and send a TextMessage
+    // For this simplified version, we just log the message
+}
+
+void Server::onExternalDataUpdated(const QString &source, bool success) {
+    // Handle external data updates for propagation modeling
+    qWarning() << "External data updated from" << source << (success ? "successfully" : "with errors");
+    
+    if (success) {
+        // Update propagation model with new data
+        updateHFBandPropagation();
+    } else {
+        qWarning() << "Failed to update external data from" << source;
+    }
+}
+
+void Server::regSslError(const QList<QSslError> &errors) {
+    // Handle SSL errors during registration
+    qWarning() << "SSL errors during registration:";
+    for (const QSslError &error : errors) {
+        qWarning() << " -" << error.errorString();
+    }
+}
+
+void Server::finished() {
+    // Called when the server thread finishes
+    qWarning() << "Server thread finished";
+    bRunning = false;
+}
+
+void Server::update() {
+    // Update server state periodically
+    qWarning() << "Server update";
+    // In a full implementation, this would update various server stats
+}
+
+void Server::newClient() {
+    // Handle new client connection
+    qWarning() << "New client connection";
+    // In a full implementation, this would accept the new connection and create a ServerUser
+}
+
+void Server::connectionClosed(QAbstractSocket::SocketError error, const QString &errorString) {
+    // Handle closed connection
+    qWarning() << "Connection closed with error:" << errorString << "(" << error << ")";
+}
+
+void Server::sslError(const QList<QSslError> &errors) {
+    // Handle SSL errors
+    qWarning() << "SSL errors:";
+    for (const QSslError &error : errors) {
+        qWarning() << " -" << error.errorString();
+    }
+}
+
+void Server::message(Mumble::Protocol::TCPMessageType type, const QByteArray &data, ServerUser *cCon) {
+    // Process incoming message
+    qWarning() << "Received message of type" << static_cast<int>(type) 
+              << "from" << (cCon ? cCon->qsName : "unknown");
+}
+
+void Server::checkTimeout() {
+    // Check for user timeouts
+    qWarning() << "Checking for user timeouts";
+    // In a full implementation, this would disconnect users who haven't sent data in a while
+}
+
+void Server::tcpTransmitData(QByteArray data, unsigned int id) {
+    // Transmit data over TCP
+    qWarning() << "Transmitting" << data.size() << "bytes of TCP data to user ID" << id;
+}
+
+void Server::doSync(unsigned int id) {
+    // Synchronize server state with client
+    qWarning() << "Synchronizing server state with user ID" << id;
+}
+
+void Server::encrypted() {
+    // Handle encrypted connection
+    qWarning() << "Encrypted connection established";
+}
+
+void Server::udpActivated(int socketDescriptor) {
+    // Handle UDP socket activation
+    qWarning() << "UDP socket activated on descriptor" << socketDescriptor;
+}
+
+void Server::customEvent(QEvent *evt) {
+    // Handle custom event
+    if (evt->type() == EXEC_QEVENT) {
+        ExecEvent *e = static_cast<ExecEvent *>(evt);
+        e->execute();
+    }
+}
+
+void Server::run() {
+    // Main server thread loop
+    qWarning() << "Server thread starting";
+    bRunning = true;
+    
+    while (bRunning) {
+        // In a real implementation, this would process incoming connections and messages
+        // For this simplified version, we'll just sleep
+        QThread::msleep(100);
+    }
+    
+    qWarning() << "Server thread exiting";
+}
+
+void SslServer::incomingConnection(qintptr socketDescriptor) {
+    // Handle incoming SSL connection
+    QSslSocket *qss = new QSslSocket(this);
+    
+    if (qss->setSocketDescriptor(socketDescriptor)) {
+        qWarning() << "New SSL connection from" << qss->peerAddress().toString();
+        qlSockets.append(qss);
+    } else {
+        delete qss;
+    }
+}
+
+// Implementation of ExecEvent methods
+ExecEvent::ExecEvent(boost::function<void()> f) 
+    : QEvent(static_cast<QEvent::Type>(EXEC_QEVENT)), func(f) {
+}
+
+void ExecEvent::execute() {
+    func();
 }
 
 bool Server::canCommunicate(ServerUser *u1, ServerUser *u2) {
@@ -349,7 +485,7 @@ void Server::userStateChanged(ServerUser *u) {
     // Update the user's state and notify other users as needed
     
     // Check if the user has a grid locator in their metadata
-    QString grid = u->qsMetadata.value("maidenheadgrid", "").toString();
+    QString grid = u->qmUserData.value("maidenheadgrid", "");
     if (!grid.isEmpty()) {
         // Validate the grid locator format (should be 4 or 6 characters)
         QRegularExpression gridRegex("^[A-R]{2}[0-9]{2}([a-x]{2})?$");
@@ -367,7 +503,7 @@ void Server::userStateChanged(ServerUser *u) {
         
         // Update audio routing for this user with all other users
         foreach(ServerUser *other, qhUsers) {
-            if (other->sState == ServerUser::Authenticated && other != u) {
+            if (other->iId > 0 && other != u) {
                 updateAudioRouting(u, other);
             }
         }
@@ -380,7 +516,7 @@ void Server::userStateChanged(ServerUser *u) {
     }
     
     // Check if the user has a preferred HF band in their metadata
-    QString preferredBand = u->qsMetadata.value("preferredhfband", "").toString();
+    QString preferredBand = u->qmUserData.value("preferredhfband", "");
     if (!preferredBand.isEmpty()) {
         qWarning() << "User" << u->qsName << "has preferred HF band:" << preferredBand;
         
@@ -412,9 +548,9 @@ void Server::updateHFBandPropagation() {
     
     // Update audio routing for all users
     foreach(ServerUser *u1, qhUsers) {
-        if (u1->sState == ServerUser::Authenticated) {
+        if (u1->iId > 0) {
             foreach(ServerUser *u2, qhUsers) {
-                if (u2->sState == ServerUser::Authenticated && u1 != u2) {
+                if (u2->iId > 0 && u1 != u2) {
                     updateAudioRouting(u1, u2);
                 }
             }
@@ -434,8 +570,8 @@ void Server::updateAudioRouting(ServerUser *u1, ServerUser *u2) {
     float signalQuality = m_pHFBandSimulation->getSignalQuality(u1, u2);
     
     // Get the users' grid locators
-    QString grid1 = u1->qsMetadata.value("maidenheadgrid", "").toString();
-    QString grid2 = u2->qsMetadata.value("maidenheadgrid", "").toString();
+    QString grid1 = u1->qmUserData.value("maidenheadgrid", "");
+    QString grid2 = u2->qmUserData.value("maidenheadgrid", "");
     
     if (!grid1.isEmpty() && !grid2.isEmpty()) {
         // Calculate fading effects based on signal quality

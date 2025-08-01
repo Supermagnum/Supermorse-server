@@ -1,0 +1,15 @@
+/home/haaken/github-projects/Supermorse-server/build/CMakeFiles/edit_cache.dir
+/home/haaken/github-projects/Supermorse-server/build/CMakeFiles/rebuild_cache.dir
+/home/haaken/github-projects/Supermorse-server/build/CMakeFiles/list_install_components.dir
+/home/haaken/github-projects/Supermorse-server/build/CMakeFiles/install.dir
+/home/haaken/github-projects/Supermorse-server/build/CMakeFiles/install/local.dir
+/home/haaken/github-projects/Supermorse-server/build/CMakeFiles/install/strip.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/murmur.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/edit_cache.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/rebuild_cache.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/list_install_components.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/install.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/install/local.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/install/strip.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/murmur_autogen_timestamp_deps.dir
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/murmur_autogen.dir

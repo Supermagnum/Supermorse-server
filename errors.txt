@@ -1,0 +1,48 @@
+This script requires some steps to be run as root. You may be prompted for your password.
+Checking for required packages...
+Package libqt5core5a is not installed. Installing...
+Funnet:1 http://ftp.uninett.no/ubuntu noble InRelease
+Funnet:2 http://ftp.uninett.no/ubuntu noble-updates InRelease
+Funnet:3 http://ftp.uninett.no/ubuntu noble-backports InRelease
+Funnet:4 http://dl.google.com/linux/earth/deb stable InRelease
+Funnet:5 https://dl.google.com/linux/chrome/deb stable InRelease
+Funnet:6 https://packages.microsoft.com/repos/code stable InRelease
+Funnet:7 https://deb.opera.com/opera-stable stable InRelease
+Funnet:8 http://security.ubuntu.com/ubuntu noble-security InRelease
+Funnet:9 https://screenrec.com/download/ubuntu stable InRelease
+Ign:10 https://mirror.accum.se/mirror/linuxmint.com/packages xia InRelease
+Funnet:11 https://mirror.accum.se/mirror/linuxmint.com/packages xia Release
+Funnet:13 https://repo.mongodb.org/apt/ubuntu jammy/mongodb-org/8.0 InRelease
+Funnet:14 https://ppa.launchpadcontent.net/freecad-maintainers/freecad-stable/ubuntu noble InRelease
+Funnet:15 https://ppa.launchpadcontent.net/kicad/kicad-8.0-releases/ubuntu noble InRelease
+Funnet:12 https://hub-dist.unity3d.com/artifactory/hub-debian-prod-local stable InRelease
+Funnet:16 https://ppa.javinator9889.com all InRelease
+Funnet:17 https://ppa.launchpadcontent.net/makehuman-official/makehuman-community/ubuntu noble InRelease
+Funnet:18 https://josm.openstreetmap.de/apt noble InRelease
+Funnet:19 https://ppa.launchpadcontent.net/obsproject/obs-studio/ubuntu noble InRelease
+Funnet:20 https://ppa.launchpadcontent.net/ok2cqr/cqrprop/ubuntu noble InRelease
+Funnet:21 https://ppa.launchpadcontent.net/openshot.developers/ppa/ubuntu noble InRelease
+Funnet:22 https://ppa.launchpadcontent.net/penguin359/trustedqsl/ubuntu noble InRelease
+Funnet:23 https://ksp-ckan.s3-us-west-2.amazonaws.com/deb stable InRelease
+Leser pakkelister...
+Leser pakkelister...
+Skaper oversikt over avhengighetsforhold...
+Leser tilstandsinformasjon...
+Du har allerede nyeste versjon av libqt5core5t64 (5.15.13+dfsg-1ubuntu1).
+Følgende pakker ble automatisk installert og er ikke lenger påkrevet:
+  libmecab2 libpcre16-3 libpcre3 libpcre3-dev libpcre32-3 libpcrecpp0v5
+  libpocoactiverecord80t64 libpococrypto80t64 libpocodata80t64
+  libpocodatamysql80t64 libpocodataodbc80t64 libpocodatapostgresql80t64
+  libpocodatasqlite80t64 libpocoencodings80t64 libpocofoundation80t64
+  libpocojson80t64 libpocojwt80t64 libpocomongodb80t64 libpoconet80t64
+  libpoconetssl80t64 libpocoredis80t64 libpocoutil80t64 libpocoxml80t64
+  libpocozip80t64 mecab-ipadic mecab-ipadic-utf8 mecab-utils
+Bruk «sudo apt autoremove» for å fjerne dem.
+0 oppgraderte, 0 nylig installerte, 0 å fjerne og 0 ikke oppgradert.
+Creating build directory...
+Configuring with CMake...
+-- Configuring done (0.0s)
+-- Generating done (0.0s)
+-- Build files have been written to: /home/haaken/github-projects/Supermorse-server/build
+Building the project...
+[ 11%] Building CXX object src/murmur/CMakeFiles/murmur.dir/main.cpp.o

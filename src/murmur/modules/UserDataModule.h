@@ -16,6 +16,7 @@
 #include <QtCore/QByteArray>
 #include <QtCore/QMap>
 #include <QtCore/QMutex>
+#include <QtNetwork/QSslCertificate>
 
 class Server;
 class ServerUser;
@@ -242,7 +243,7 @@ signals:
 
 private:
     Server *m_server; // Pointer to the server instance
-    QMutex m_mutex; // Mutex for thread safety
+    QRecursiveMutex m_mutex; // Mutex for thread safety
     
     // Cache for user data
     QHash<int, QString> m_userNameCache;

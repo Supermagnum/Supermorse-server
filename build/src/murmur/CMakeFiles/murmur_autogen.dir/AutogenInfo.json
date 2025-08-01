@@ -1,0 +1,257 @@
+{
+	"BUILD_DIR" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen",
+	"CMAKE_BINARY_DIR" : "/home/haaken/github-projects/Supermorse-server/build",
+	"CMAKE_CURRENT_BINARY_DIR" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur",
+	"CMAKE_CURRENT_SOURCE_DIR" : "/home/haaken/github-projects/Supermorse-server/src/murmur",
+	"CMAKE_EXECUTABLE" : "/usr/bin/cmake",
+	"CMAKE_LIST_FILES" : 
+	[
+		"/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeLists.txt",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ConfigVersion.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5Config.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5/Qt5ModuleLocation.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigVersion.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfig.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtras.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreConfigExtrasMkspecDir.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Core/Qt5CoreMacros.cmake",
+		"/usr/share/cmake-3.28/Modules/CMakeParseArguments.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5NetworkConfigVersion.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5NetworkConfig.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QConnmanEnginePlugin.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QGenericEnginePlugin.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Network/Qt5Network_QNetworkManagerEnginePlugin.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Sql/Qt5SqlConfigVersion.cmake",
+		"/usr/lib/x86_64-linux-gnu/cmake/Qt5Sql/Qt5SqlConfig.cmake"
+	],
+	"CMAKE_SOURCE_DIR" : "/home/haaken/github-projects/Supermorse-server",
+	"DEP_FILE" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen/deps",
+	"DEP_FILE_RULE_NAME" : "murmur_autogen/timestamp",
+	"HEADERS" : 
+	[
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/AudioReceiverBuffer.h",
+			"MU",
+			"EWIEGA46WW/moc_AudioReceiverBuffer.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/ChannelListenerManager.h",
+			"MU",
+			"EWIEGA46WW/moc_ChannelListenerManager.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/DBWrapper.h",
+			"MU",
+			"EWIEGA46WW/moc_DBWrapper.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/Server.h",
+			"MU",
+			"EWIEGA46WW/moc_Server.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/ServerApplication.h",
+			"MU",
+			"EWIEGA46WW/moc_ServerApplication.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/Timer.h",
+			"MU",
+			"EWIEGA46WW/moc_Timer.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/VolumeAdjustment.h",
+			"MU",
+			"EWIEGA46WW/moc_VolumeAdjustment.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/database/ConnectionParameter.h",
+			"MU",
+			"BL3K65LMA5/moc_ConnectionParameter.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/database/MariaDBConnectionParameter.h",
+			"MU",
+			"BL3K65LMA5/moc_MariaDBConnectionParameter.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/HFBandSimulation.h",
+			"MU",
+			"OKIHRWMZEG/moc_HFBandSimulation.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/IServerModule.h",
+			"MU",
+			"OKIHRWMZEG/moc_IServerModule.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/ModuleManager.h",
+			"MU",
+			"OKIHRWMZEG/moc_ModuleManager.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/PropagationModule.h",
+			"MU",
+			"OKIHRWMZEG/moc_PropagationModule.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserDataModule.h",
+			"MU",
+			"OKIHRWMZEG/moc_UserDataModule.cpp",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserStatisticsModule.h",
+			"MU",
+			"OKIHRWMZEG/moc_UserStatisticsModule.cpp",
+			null
+		]
+	],
+	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
+	"INCLUDE_DIR" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen/include",
+	"MOC_COMPILATION_FILE" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen/mocs_compilation.cpp",
+	"MOC_DEFINITIONS" : [ "QT_CORE_LIB", "QT_NETWORK_LIB", "QT_NO_DEBUG", "QT_SQL_LIB" ],
+	"MOC_DEPEND_FILTERS" : 
+	[
+		[
+			"Q_PLUGIN_METADATA",
+			"[\n][ \t]*Q_PLUGIN_METADATA[ \t]*\\([^\\)]*FILE[ \t]*\"([^\"]+)\""
+		]
+	],
+	"MOC_INCLUDES" : 
+	[
+		"/home/haaken/github-projects/Supermorse-server/src/murmur",
+		"/home/haaken/github-projects/Supermorse-server/build/src/murmur",
+		"/usr/include/x86_64-linux-gnu/qt5",
+		"/usr/include/x86_64-linux-gnu/qt5/QtCore",
+		"/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++",
+		"/usr/include/x86_64-linux-gnu/qt5/QtNetwork",
+		"/usr/include/x86_64-linux-gnu/qt5/QtSql",
+		"/usr/include/c++/13",
+		"/usr/include/x86_64-linux-gnu/c++/13",
+		"/usr/include/c++/13/backward",
+		"/usr/lib/gcc/x86_64-linux-gnu/13/include",
+		"/usr/local/include",
+		"/usr/include/x86_64-linux-gnu",
+		"/usr/include"
+	],
+	"MOC_MACRO_NAMES" : [ "Q_OBJECT", "Q_GADGET", "Q_NAMESPACE", "Q_NAMESPACE_EXPORT" ],
+	"MOC_OPTIONS" : [],
+	"MOC_PATH_PREFIX" : false,
+	"MOC_PREDEFS_CMD" : 
+	[
+		"/usr/bin/c++",
+		"-std=gnu++17",
+		"-dM",
+		"-E",
+		"-c",
+		"/usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp"
+	],
+	"MOC_PREDEFS_FILE" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen/moc_predefs.h",
+	"MOC_RELAXED_MODE" : false,
+	"MOC_SKIP" : [],
+	"MULTI_CONFIG" : false,
+	"PARALLEL" : 12,
+	"PARSE_CACHE_FILE" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/murmur_autogen.dir/ParseCache.txt",
+	"QT_MOC_EXECUTABLE" : "/usr/lib/qt5/bin/moc",
+	"QT_UIC_EXECUTABLE" : "",
+	"QT_VERSION_MAJOR" : 5,
+	"QT_VERSION_MINOR" : 15,
+	"SETTINGS_FILE" : "/home/haaken/github-projects/Supermorse-server/build/src/murmur/CMakeFiles/murmur_autogen.dir/AutogenUsed.txt",
+	"SOURCES" : 
+	[
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/AudioReceiverBuffer.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/ChannelListenerManager.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/DBWrapper.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/Server.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/ServerApplication.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/Timer.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/VolumeAdjustment.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/database/MariaDBConnectionParameter.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/main.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/HFBandSimulation.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/IServerModule.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/ModuleManager.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/PropagationModule.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserDataModule.cpp",
+			"MU",
+			null
+		],
+		[
+			"/home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserStatisticsModule.cpp",
+			"MU",
+			null
+		]
+	],
+	"UIC_OPTIONS" : [],
+	"UIC_SEARCH_PATHS" : [],
+	"UIC_SKIP" : [],
+	"UIC_UI_FILES" : [],
+	"VERBOSITY" : 0
+}

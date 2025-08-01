@@ -8,11 +8,16 @@ cmake_minimum_required(VERSION 3.15)
 # Set the project name and version
 project(supermorse-mumble VERSION 1.0.0)
 
+# Enable Qt features
+set(CMAKE_AUTOMOC ON)  # Automatically run moc when needed
+set(CMAKE_AUTORCC ON)  # Automatically run rcc when needed
+set(CMAKE_AUTOUIC ON)  # Automatically run uic when needed
+
 # Find Qt packages
 find_package(Qt5 COMPONENTS Core Network Sql REQUIRED)
 
 # Set C++ standard
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set compiler flags
@@ -26,26 +31,54 @@ endif()
 
 # Define the source files
 set(SOURCES
+    # Main application files
     main.cpp
     Server.cpp
     ServerApplication.cpp
-    modules/IServerModule.h
+    
+    # Database files
+    database/MariaDBConnectionParameter.cpp
+    
+    # Core implementation files
+    AudioReceiverBuffer.cpp
+    ChannelListenerManager.cpp
+    DBWrapper.cpp
+    Timer.cpp
+    VolumeAdjustment.cpp
+    
+    # Module files
+    modules/IServerModule.cpp
     modules/ModuleManager.cpp
-    modules/ModuleManager.h
     modules/UserDataModule.cpp
-    modules/UserDataModule.h
     modules/PropagationModule.cpp
-    modules/PropagationModule.h
     modules/HFBandSimulation.cpp
-    modules/HFBandSimulation.h
     modules/UserStatisticsModule.cpp
-    modules/UserStatisticsModule.h
 )
 
 # Define the header files
 set(HEADERS
+    # Main application headers
     Server.h
     ServerApplication.h
+    
+    # Core header files
+    AudioReceiverBuffer.h
+    ChannelListenerManager.h
+    DBWrapper.h
+    Timer.h
+    VolumeAdjustment.h
+    
+    # Database headers
+    database/ConnectionParameter.h
+    database/MariaDBConnectionParameter.h
+    
+    # Module headers
+    modules/IServerModule.h
+    modules/ModuleManager.h
+    modules/UserDataModule.h
+    modules/PropagationModule.h
+    modules/HFBandSimulation.h
+    modules/UserStatisticsModule.h
 )
 
 # Create the executable

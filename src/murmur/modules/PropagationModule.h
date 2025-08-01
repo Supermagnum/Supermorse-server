@@ -237,7 +237,7 @@ signals:
 private:
     Server *m_server; // Pointer to the server instance
     HFBandSimulation m_hfBandSimulation; // HF band simulation engine
-    QMutex m_mutex; // Mutex for thread safety
+    QRecursiveMutex m_mutex; // Mutex for thread safety
     QTimer m_updateTimer; // Timer for periodic updates
     
     /**

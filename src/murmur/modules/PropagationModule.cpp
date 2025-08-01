@@ -117,7 +117,7 @@ QString PropagationModule::description() const {
 }
 
 QVariant PropagationModule::getSetting(const QString &key, const QVariant &defaultValue) const {
-    QMutexLocker locker(&m_mutex);
+    QMutexLocker locker(const_cast<QRecursiveMutex*>(&m_mutex));
     
     // In a real implementation, this would read from a settings store
     // For this simplified version, we just return the default value
@@ -145,8 +145,8 @@ float PropagationModule::calculatePropagation(ServerUser *user1, ServerUser *use
     QMutexLocker locker(&m_mutex);
     
     // Get the grid locators
-    QString grid1 = user1->qsMetadata.value("maidenheadgrid", "").toString();
-    QString grid2 = user2->qsMetadata.value("maidenheadgrid", "").toString();
+    QString grid1 = user1->qmUserData.value("maidenheadgrid", "");
+    QString grid2 = user2->qmUserData.value("maidenheadgrid", "");
     
     if (grid1.isEmpty() || grid2.isEmpty()) {
         return 0.0f; // No propagation without grid locators
@@ -269,8 +269,8 @@ void PropagationModule::updateAudioRouting(ServerUser *u1, ServerUser *u2) {
     float signalQuality = getSignalQuality(u1, u2);
     
     // Get the users' grid locators
-    QString grid1 = u1->qsMetadata.value("maidenheadgrid", "").toString();
-    QString grid2 = u2->qsMetadata.value("maidenheadgrid", "").toString();
+    QString grid1 = u1->qmUserData.value("maidenheadgrid", "");
+    QString grid2 = u2->qmUserData.value("maidenheadgrid", "");
     
     if (!grid1.isEmpty() && !grid2.isEmpty()) {
         // Calculate fading effects based on signal quality

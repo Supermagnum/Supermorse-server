@@ -10,7 +10,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QString>
-#include <QtCore/QMutex>
+#include <QtCore/QRecursiveMutex>
 #include <QtCore/QDir>
 #include <QtCore/QFile>
 #include <QtCore/QTimer>
@@ -98,7 +98,7 @@ signals:
 
 private:
     Server *m_server; // Pointer to the server instance
-    QMutex m_mutex; // Mutex for thread safety
+    QRecursiveMutex m_mutex; // Mutex for thread safety
     QDir m_statsDirectory; // The user statistics directory
     
     /**

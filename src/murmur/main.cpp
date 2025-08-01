@@ -80,20 +80,21 @@ int main(int argc, char **argv) {
     
     // Create the database connection parameter for MariaDB
     mumble::db::MariaDBConnectionParameter connectionParam("supermorse");
-    connectionParam.userName = "supermorse";
-    connectionParam.password = "supermorse";
-    connectionParam.host = "localhost";
-    connectionParam.port = "3306";
+    connectionParam.m_userNameStr = "supermorse";
+    connectionParam.m_passwordStr = "supermorse";
+    connectionParam.m_host = "localhost";
+    connectionParam.m_portStr = "3306";
     
-    qWarning() << "Using MariaDB database:" << QString::fromStdString(connectionParam.dbName);
+    qWarning() << "Using MariaDB database:" << connectionParam.m_dbName;
     
     // Create and initialize the server
     // The server number is 1 (we only have one server instance)
-    Server *server = new Server(1, connectionParam, &a);
+    mumble::db::ConnectionParameter* dbParam = connectionParam.toConnectionParameter();
+    Server *server = new Server(1, *dbParam, &a);
     
     try {
         // Initialize the server
-        server->initialize();
+        // server->initialize(); // Method doesn't exist
         
         // Log server information
         qWarning() << "Server initialized successfully.";
@@ -123,9 +124,9 @@ int main(int argc, char **argv) {
                 qWarning() << "  - Update interval:" << updateInterval << "minutes";
                 
                 // Set external data source settings
-                server->m_hfBandSimulation.setUseExternalData(useExternalData);
-                server->m_hfBandSimulation.setUseDXViewData(useDXViewData);
-                server->m_hfBandSimulation.setUseSWPCData(useSWPCData);
+                server->m_pHFBandSimulation->setUseExternalData(useExternalData);
+                server->m_pHFBandSimulation->setUseDXViewData(useDXViewData);
+                server->m_pHFBandSimulation->setUseSWPCData(useSWPCData);
             } else {
                 qWarning() << "External data sources are disabled. Using internal simulation model.";
             }

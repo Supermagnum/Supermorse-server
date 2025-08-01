@@ -1,0 +1,7 @@
+/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeFiles/murmur.dir
+/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeFiles/edit_cache.dir
+/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeFiles/rebuild_cache.dir
+/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeFiles/list_install_components.dir
+/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeFiles/install.dir
+/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeFiles/install/local.dir
+/home/haaken/github-projects/Supermorse-server/src/murmur/CMakeFiles/install/strip.dir

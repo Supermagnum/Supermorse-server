@@ -9,9 +9,9 @@
 #include <QtCore/QDebug>
 #include <QtCore/QDateTime>
 #include <QtCore/QRandomGenerator>
-#include <QtCore/QNetworkAccessManager>
-#include <QtCore/QNetworkReply>
-#include <QtCore/QNetworkRequest>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkReply>
+#include <QtNetwork/QNetworkRequest>
 #include <QtCore/QJsonDocument>
 #include <QtCore/QJsonObject>
 #include <QtCore/QJsonArray>
@@ -44,8 +44,8 @@ HFBandSimulation::~HFBandSimulation() {
 
 float HFBandSimulation::calculatePropagation(ServerUser *user1, ServerUser *user2) {
     // Get the grid locators
-    QString grid1 = user1->qsMetadata.value("maidenheadgrid", "").toString();
-    QString grid2 = user2->qsMetadata.value("maidenheadgrid", "").toString();
+    QString grid1 = user1->qmUserData.value("maidenheadgrid", "");
+    QString grid2 = user2->qmUserData.value("maidenheadgrid", "");
     
     if (grid1.isEmpty() || grid2.isEmpty()) {
         return 0.0f; // No propagation without grid locators
