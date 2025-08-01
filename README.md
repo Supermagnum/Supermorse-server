@@ -3,7 +3,7 @@
 This repository contains a modified version of the Mumble server (Murmur) specifically designed for the Supermorse application. The server includes special features for amateur radio simulation, including HF band channels and realistic propagation simulation.
 
 # Application link:
-https://github.com/Supermagnum/supermorse-app
+https://gitlab.com/supermag-group/supermorse-app
 
 ## Features
 
@@ -56,7 +56,7 @@ https://github.com/Supermagnum/supermorse-app
 
 ```bash
 # Clone the repository
-git clone https://github.com/Supermagnum/Supermorse-server.git
+git clone https://gitlab.com/supermag-group/Supermorse-server.git
 cd supermorse-mumble
 
 # Build the server
@@ -67,7 +67,7 @@ cd supermorse-mumble
 
 ```batch
 # Clone the repository
-git clone https://github.com/Supermagnum/Supermorse-server.git
+git clone https://gitlab.com/supermag-group/Supermorse-server.git
 cd supermorse-mumble
 
 # Build the server
@@ -203,6 +203,8 @@ After building, the server executable can be found in the `build/bin` directory.
 build\bin\Release\murmur.exe -c config\mumble-server.ini
 ```
 
+The server uses port 64738 by default. If you want to allow connections from outside your local network, you'll need to set up port forwarding in your router to forward this port to your server.
+
 Command-line options:
 - `-c, --config <file>`: Specify the configuration file to use
 - `-d, --database <file>`: Specify the database file to use
@@ -215,7 +217,7 @@ To verify that all features of the modified Mumble server are working correctly,
 
 1. **Build and run the server** using the instructions above
 2. **Prepare the SuperMorse app**:
-   - Ensure you have the latest version of the SuperMorse app from https://github.com/Supermagnum/supermorse-app
+   - Ensure you have the latest version of the SuperMorse app from https://gitlab.com/supermag-group/supermorse-app
    - Create a user account with 100% mastery of the International Morse alphabet, numbers, and prosigns
    - If testing only, you can temporarily modify the `connect()` method in `murmur.js` to bypass the mastery check
 
@@ -409,10 +411,10 @@ This modified Mumble server is designed to work with the Supermorse application.
 When the user has spent xx hours doing simulated Morse contacts, unlock SSB "channels" per this bandplan.
 Add a frequency dial in the GUI,a used server's hardware can handle the load if it has the correct parts.
 Add support for GPU computing.
-https://github.com/Supermagnum/Supermorse-server/blob/main/Bandplans_and_antennas/band_segments.csv
+https://gitlab.com/supermag-group/Supermorse-server/-/blob/main/Bandplans_and_antennas/band_segments.csv
 
 Also read:
-https://github.com/Supermagnum/Supermorse-server/blob/main/future-plans.md
+https://gitlab.com/supermag-group/Supermorse-server/-/blob/main/future-plans.md
 
 ## License
 
