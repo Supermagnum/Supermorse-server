@@ -43,6 +43,11 @@ https://gitlab.com/supermag-group/supermorse-app
 - Signal strength indicators
 - Propagation condition updates
 
+
+## Port forwarding 
+- The router needs to have port 64738 forwarded to the IP where the Supermorse server is running.
+- Please consult your routers manual on how to do this. 
+
 ## Building the Server
 
 ### Prerequisites
