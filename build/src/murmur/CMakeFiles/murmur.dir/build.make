@@ -187,10 +187,24 @@ src/murmur/CMakeFiles/murmur.dir/DBWrapper.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/murmur.dir/DBWrapper.cpp.s"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/haaken/github-projects/Supermorse-server/src/murmur/DBWrapper.cpp -o CMakeFiles/murmur.dir/DBWrapper.cpp.s
 
+src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
+src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/ThreadPool.cpp
+src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.o"
+	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.o -MF CMakeFiles/murmur.dir/ThreadPool.cpp.o.d -o CMakeFiles/murmur.dir/ThreadPool.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/ThreadPool.cpp
+
+src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/murmur.dir/ThreadPool.cpp.i"
+	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/haaken/github-projects/Supermorse-server/src/murmur/ThreadPool.cpp > CMakeFiles/murmur.dir/ThreadPool.cpp.i
+
+src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/murmur.dir/ThreadPool.cpp.s"
+	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/haaken/github-projects/Supermorse-server/src/murmur/ThreadPool.cpp -o CMakeFiles/murmur.dir/ThreadPool.cpp.s
+
 src/murmur/CMakeFiles/murmur.dir/Timer.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/Timer.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/Timer.cpp
 src/murmur/CMakeFiles/murmur.dir/Timer.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Building CXX object src/murmur/CMakeFiles/murmur.dir/Timer.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/murmur/CMakeFiles/murmur.dir/Timer.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/Timer.cpp.o -MF CMakeFiles/murmur.dir/Timer.cpp.o.d -o CMakeFiles/murmur.dir/Timer.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/Timer.cpp
 
 src/murmur/CMakeFiles/murmur.dir/Timer.cpp.i: cmake_force
@@ -204,7 +218,7 @@ src/murmur/CMakeFiles/murmur.dir/Timer.cpp.s: cmake_force
 src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/VolumeAdjustment.cpp
 src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_11) "Building CXX object src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o -MF CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o.d -o CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/VolumeAdjustment.cpp
 
 src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.i: cmake_force
@@ -218,7 +232,7 @@ src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.s: cmake_force
 src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/modules/IServerModule.cpp
 src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_12) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.o -MF CMakeFiles/murmur.dir/modules/IServerModule.cpp.o.d -o CMakeFiles/murmur.dir/modules/IServerModule.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/modules/IServerModule.cpp
 
 src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.i: cmake_force
@@ -232,7 +246,7 @@ src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.s: cmake_force
 src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/modules/ModuleManager.cpp
 src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_13) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o -MF CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o.d -o CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/modules/ModuleManager.cpp
 
 src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.i: cmake_force
@@ -246,7 +260,7 @@ src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.s: cmake_force
 src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserDataModule.cpp
 src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_14) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o -MF CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o.d -o CMakeFiles/murmur.dir/modules/UserDataModule.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserDataModule.cpp
 
 src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.i: cmake_force
@@ -260,7 +274,7 @@ src/murmur/CMakeFiles/murmur.dir/modules/UserDataModule.cpp.s: cmake_force
 src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/modules/PropagationModule.cpp
 src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_15) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o -MF CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o.d -o CMakeFiles/murmur.dir/modules/PropagationModule.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/modules/PropagationModule.cpp
 
 src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.i: cmake_force
@@ -274,7 +288,7 @@ src/murmur/CMakeFiles/murmur.dir/modules/PropagationModule.cpp.s: cmake_force
 src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/modules/HFBandSimulation.cpp
 src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_16) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o -MF CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o.d -o CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/modules/HFBandSimulation.cpp
 
 src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.i: cmake_force
@@ -288,7 +302,7 @@ src/murmur/CMakeFiles/murmur.dir/modules/HFBandSimulation.cpp.s: cmake_force
 src/murmur/CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/flags.make
 src/murmur/CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o: /home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserStatisticsModule.cpp
 src/murmur/CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o: src/murmur/CMakeFiles/murmur.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_17) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Building CXX object src/murmur/CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT src/murmur/CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o -MF CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o.d -o CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.o -c /home/haaken/github-projects/Supermorse-server/src/murmur/modules/UserStatisticsModule.cpp
 
 src/murmur/CMakeFiles/murmur.dir/modules/UserStatisticsModule.cpp.i: cmake_force
@@ -309,6 +323,7 @@ murmur_OBJECTS = \
 "CMakeFiles/murmur.dir/AudioReceiverBuffer.cpp.o" \
 "CMakeFiles/murmur.dir/ChannelListenerManager.cpp.o" \
 "CMakeFiles/murmur.dir/DBWrapper.cpp.o" \
+"CMakeFiles/murmur.dir/ThreadPool.cpp.o" \
 "CMakeFiles/murmur.dir/Timer.cpp.o" \
 "CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o" \
 "CMakeFiles/murmur.dir/modules/IServerModule.cpp.o" \
@@ -329,6 +344,7 @@ bin/murmur: src/murmur/CMakeFiles/murmur.dir/database/MariaDBConnectionParameter
 bin/murmur: src/murmur/CMakeFiles/murmur.dir/AudioReceiverBuffer.cpp.o
 bin/murmur: src/murmur/CMakeFiles/murmur.dir/ChannelListenerManager.cpp.o
 bin/murmur: src/murmur/CMakeFiles/murmur.dir/DBWrapper.cpp.o
+bin/murmur: src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.o
 bin/murmur: src/murmur/CMakeFiles/murmur.dir/Timer.cpp.o
 bin/murmur: src/murmur/CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o
 bin/murmur: src/murmur/CMakeFiles/murmur.dir/modules/IServerModule.cpp.o
@@ -342,7 +358,7 @@ bin/murmur: /usr/lib/x86_64-linux-gnu/libQt5Network.so.5.15.13
 bin/murmur: /usr/lib/x86_64-linux-gnu/libQt5Sql.so.5.15.13
 bin/murmur: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13
 bin/murmur: src/murmur/CMakeFiles/murmur.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_18) "Linking CXX executable ../../bin/murmur"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/haaken/github-projects/Supermorse-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_19) "Linking CXX executable ../../bin/murmur"
 	cd /home/haaken/github-projects/Supermorse-server/build/src/murmur && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/murmur.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

@@ -7,11 +7,14 @@
 #include "../Server.h"
 
 #include <QtCore/QDebug>
+#include <QtCore/QThread>
 
 ModuleManager::ModuleManager(Server *server, QObject *parent)
     : QObject(parent)
     , m_server(server) {
-    // Nothing to do here
+    // Create the thread pool with optimal number of threads
+    m_threadPool = new ThreadPool(ThreadPool::optimalThreadCount(), this);
+    qDebug() << "ModuleManager: Created thread pool with" << m_threadPool->threadCount() << "threads";
 }
 
 ModuleManager::~ModuleManager() {
@@ -20,8 +23,82 @@ ModuleManager::~ModuleManager() {
     
     // Clear the module registry
     m_modules.clear();
+    
+    // The thread pool will be automatically deleted since it's a child QObject
+}
+void ModuleManager::broadcastEventParallel(const QString &eventName, const QVariant &data) {
+    // Create a list of futures to track task completion
+    std::vector<std::future<void>> futures;
+    
+    // Reserve space for the futures
+    futures.reserve(m_modules.size());
+    
+    // Enqueue tasks for each module
+    foreach (IServerModule *module, m_modules.values()) {
+        // Create a copy of the event data and module pointer for the task
+        auto task = [module, eventName, data]() {
+            // Emit the event signal for this module
+            emit module->moduleEvent(eventName, data);
+        };
+        
+        // Enqueue the task and store the future
+        futures.push_back(m_threadPool->enqueue(task));
+    }
+    
+    // Wait for all tasks to complete
+    for (auto& future : futures) {
+        future.wait();
+    }
+    
+    qDebug() << "ModuleManager: Parallel broadcast of event" << eventName << "to" << m_modules.size() << "modules completed";
 }
 
+void ModuleManager::executeOnAllModules(const std::function<void(IServerModule*)>& func) {
+    // Create a list of futures to track task completion
+    std::vector<std::future<void>> futures;
+    
+    // Reserve space for the futures
+    futures.reserve(m_modules.size());
+    
+    // Enqueue tasks for each module
+    foreach (IServerModule *module, m_modules.values()) {
+        // Create a task that will execute the function on the module
+        auto task = [module, func]() {
+            func(module);
+        };
+        
+        // Enqueue the task and store the future
+        futures.push_back(m_threadPool->enqueue(task));
+    }
+    
+    // Wait for all tasks to complete
+    for (auto& future : futures) {
+        future.wait();
+    }
+    
+    qDebug() << "ModuleManager: Parallel execution on" << m_modules.size() << "modules completed";
+}
+
+bool ModuleManager::executeOnModule(const QString &moduleName, const std::function<void(IServerModule*)>& func) {
+    // Check if the module exists
+    if (!m_modules.contains(moduleName)) {
+        qWarning() << "ModuleManager: Cannot execute on unknown module" << moduleName;
+        return false;
+    }
+    
+    // Get the module
+    IServerModule *module = m_modules.value(moduleName);
+    
+    // Enqueue the task
+    auto future = m_threadPool->enqueue([module, func]() {
+        func(module);
+    });
+    
+    // Wait for the task to complete
+    future.wait();
+    
+    return true;
+}
 bool ModuleManager::registerModule(IServerModule *module) {
     if (!module) {
         qWarning() << "ModuleManager: Cannot register null module";

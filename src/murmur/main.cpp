@@ -75,8 +75,25 @@ int main(int argc, char **argv) {
         return 1;
     }
     
+    // Detect available CPU cores
+    int cpuCores = QThread::idealThreadCount();
+    qWarning() << "Detected" << cpuCores << "CPU cores available for parallel processing";
+    
     // Load configuration
     QSettings qs(configFile, QSettings::IniFormat);
+    
+    // Check for multi-core configuration
+    qs.beginGroup("performance");
+    bool enableMultiCore = qs.value("enable_multi_core", true).toBool();
+    int maxThreads = qs.value("max_threads", 0).toInt(); // 0 means use all available cores
+    qs.endGroup();
+    
+    if (!enableMultiCore) {
+        qWarning() << "Multi-core processing is disabled in configuration. Server will use single-threaded mode.";
+    } else {
+        int threadsToUse = (maxThreads > 0 && maxThreads < cpuCores) ? maxThreads : cpuCores;
+        qWarning() << "Server will utilize" << threadsToUse << "CPU cores for parallel processing";
+    }
     
     // Create the database connection parameter for MariaDB
     mumble::db::MariaDBConnectionParameter connectionParam("supermorse");

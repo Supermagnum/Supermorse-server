@@ -323,6 +323,30 @@ ServerApplication.cpp.s:
 	cd /home/haaken/github-projects/Supermorse-server/build && $(MAKE) $(MAKESILENT) -f src/murmur/CMakeFiles/murmur.dir/build.make src/murmur/CMakeFiles/murmur.dir/ServerApplication.cpp.s
 .PHONY : ServerApplication.cpp.s
 
+ThreadPool.o: ThreadPool.cpp.o
+.PHONY : ThreadPool.o
+
+# target to build an object file
+ThreadPool.cpp.o:
+	cd /home/haaken/github-projects/Supermorse-server/build && $(MAKE) $(MAKESILENT) -f src/murmur/CMakeFiles/murmur.dir/build.make src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.o
+.PHONY : ThreadPool.cpp.o
+
+ThreadPool.i: ThreadPool.cpp.i
+.PHONY : ThreadPool.i
+
+# target to preprocess a source file
+ThreadPool.cpp.i:
+	cd /home/haaken/github-projects/Supermorse-server/build && $(MAKE) $(MAKESILENT) -f src/murmur/CMakeFiles/murmur.dir/build.make src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.i
+.PHONY : ThreadPool.cpp.i
+
+ThreadPool.s: ThreadPool.cpp.s
+.PHONY : ThreadPool.s
+
+# target to generate assembly for a file
+ThreadPool.cpp.s:
+	cd /home/haaken/github-projects/Supermorse-server/build && $(MAKE) $(MAKESILENT) -f src/murmur/CMakeFiles/murmur.dir/build.make src/murmur/CMakeFiles/murmur.dir/ThreadPool.cpp.s
+.PHONY : ThreadPool.cpp.s
+
 Timer.o: Timer.cpp.o
 .PHONY : Timer.o
 
@@ -617,6 +641,9 @@ help:
 	@echo "... ServerApplication.o"
 	@echo "... ServerApplication.i"
 	@echo "... ServerApplication.s"
+	@echo "... ThreadPool.o"
+	@echo "... ThreadPool.i"
+	@echo "... ThreadPool.s"
 	@echo "... Timer.o"
 	@echo "... Timer.i"
 	@echo "... Timer.s"

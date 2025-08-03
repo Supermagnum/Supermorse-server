@@ -247,11 +247,48 @@ src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
  /usr/include/c++/13/variant \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/QHash \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h \
- /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../Server.h \
+ /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../ThreadPool.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QtGlobal \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QDebug \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qlocale.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h \
+ /usr/include/c++/13/memory \
+ /usr/include/c++/13/bits/stl_raw_storage_iter.h \
+ /usr/include/c++/13/bits/align.h /usr/include/c++/13/bits/unique_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr.h \
+ /usr/include/c++/13/bits/shared_ptr_base.h \
+ /usr/include/c++/13/ext/concurrence.h \
+ /usr/include/c++/13/bits/shared_ptr_atomic.h \
+ /usr/include/c++/13/backward/auto_ptr.h \
+ /usr/include/c++/13/pstl/glue_memory_defs.h /usr/include/c++/13/thread \
+ /usr/include/c++/13/bits/std_thread.h \
+ /usr/include/c++/13/bits/this_thread_sleep.h /usr/include/c++/13/mutex \
+ /usr/include/c++/13/bits/std_mutex.h \
+ /usr/include/c++/13/bits/unique_lock.h \
+ /usr/include/c++/13/condition_variable /usr/include/c++/13/queue \
+ /usr/include/c++/13/deque /usr/include/c++/13/bits/stl_deque.h \
+ /usr/include/c++/13/bits/deque.tcc /usr/include/c++/13/bits/stl_queue.h \
+ /usr/include/c++/13/future /usr/include/c++/13/bits/atomic_futex.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QHash \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QFuture \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qfuture.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qfutureinterface.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qrunnable.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qmutex.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qexception.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qresultstore.h \
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h \
+ /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../Server.h \
  /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../ACL.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QFlags \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qflags.h \
@@ -266,7 +303,6 @@ src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: \
  /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../Ban.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QDateTime \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qdatetime.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \
  /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../HostAddress.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QByteArray \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qbytearray.h \
@@ -275,24 +311,6 @@ src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtNetwork/qtnetworkglobal.h \
  /usr/include/x86_64-linux-gnu/qt5/QtNetwork/qtnetwork-config.h \
  /usr/include/x86_64-linux-gnu/qt5/QtNetwork/qabstractsocket.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qlocale.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h \
- /usr/include/c++/13/memory \
- /usr/include/c++/13/bits/stl_raw_storage_iter.h \
- /usr/include/c++/13/bits/align.h /usr/include/c++/13/bits/unique_ptr.h \
- /usr/include/c++/13/bits/shared_ptr.h \
- /usr/include/c++/13/bits/shared_ptr_base.h \
- /usr/include/c++/13/ext/concurrence.h \
- /usr/include/c++/13/bits/shared_ptr_atomic.h \
- /usr/include/c++/13/backward/auto_ptr.h \
- /usr/include/c++/13/pstl/glue_memory_defs.h \
  /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../ChannelListenerManager.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QReadWriteLock \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qreadwritelock.h \
@@ -346,9 +364,7 @@ src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: \
  /usr/include/google/protobuf/arenaz_sampler.h \
  /usr/include/google/protobuf/port.h \
  /usr/include/google/protobuf/descriptor.h \
- /usr/include/google/protobuf/stubs/mutex.h /usr/include/c++/13/mutex \
- /usr/include/c++/13/bits/std_mutex.h \
- /usr/include/c++/13/bits/unique_lock.h \
+ /usr/include/google/protobuf/stubs/mutex.h \
  /usr/include/google/protobuf/stubs/once.h \
  /usr/include/google/protobuf/generated_message_reflection.h \
  /usr/include/google/protobuf/generated_enum_reflection.h \
@@ -573,9 +589,6 @@ src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qthread.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qdeadlinetimer.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h \
- /usr/include/c++/13/future /usr/include/c++/13/condition_variable \
- /usr/include/c++/13/bits/atomic_futex.h \
- /usr/include/c++/13/bits/std_thread.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QTimer \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qtimer.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasictimer.h \
@@ -602,6 +615,4 @@ src/murmur/CMakeFiles/murmur.dir/modules/ModuleManager.cpp.o: \
  /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../modules/HFBandSimulation.h \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QPair \
  /usr/include/x86_64-linux-gnu/qt5/QtCore/qpair.h \
- /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../Channel.h \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/QDebug \
- /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h
+ /home/haaken/github-projects/Supermorse-server/src/murmur/modules/../Channel.h

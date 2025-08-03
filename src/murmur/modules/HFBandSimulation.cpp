@@ -95,12 +95,6 @@ float HFBandSimulation::calculateSignalStrength(const QString &grid1, const QStr
     bool isDaytime1 = sza1 < 90.0f;
     bool isDaytime2 = sza2 < 90.0f;
     
-    // Calculate the critical frequency (foF2)
-    float foF2 = calculateCriticalFrequency();
-    
-    // Calculate the F layer height
-    float fLayerHeight = calculateFLayerHeight();
-    
     // Calculate the Maximum Usable Frequency (MUF)
     float muf = calculateMUF(distance);
     
@@ -110,8 +104,10 @@ float HFBandSimulation::calculateSignalStrength(const QString &grid1, const QStr
         emit mufChanged(muf);
     }
     
-    // Determine the best band for the distance
+    // Determine the best band for the distance (used by client app)
     int bestBand = recommendBand(distance);
+    // Suppress unused variable warning while preserving functionality for client
+    (void)bestBand;
     
     // Calculate the signal strength based on various factors
     float strength = 0.0f;
@@ -390,20 +386,63 @@ float HFBandSimulation::calculateSolarZenithAngle(const QString &grid, const QDa
 }
 
 void HFBandSimulation::getFadingEffects(float signalStrength, float &packetLoss, float &jitter, float &noiseFactor) {
-    // Calculate packet loss based on signal strength
-    // Weak signals have higher packet loss
-    packetLoss = 1.0f - signalStrength;
-    packetLoss = qBound(0.0f, packetLoss, 1.0f);
+    // In HF radio propagation, signals experience fading which causes the signal to vary in strength
+    // This method simulates those effects using a multi-component model that creates realistic fading behavior
+    // The parameters (packetLoss, jitter, noiseFactor) control how the audio is modified to simulate these effects
     
-    // Calculate jitter based on signal strength
-    // Weak signals have higher jitter
-    jitter = 1.0f - signalStrength;
-    jitter = qBound(0.0f, jitter, 1.0f);
+    // Calculate the base degradation (inverse of signal strength)
+    float baseDegradation = 1.0f - signalStrength;
     
-    // Calculate noise factor based on signal strength
-    // Weak signals have higher noise
-    noiseFactor = 1.0f - signalStrength;
-    noiseFactor = qBound(0.0f, noiseFactor, 1.0f);
+    // Get current time for time-based fading components
+    qint64 currentTimeMs = QDateTime::currentMSecsSinceEpoch();
+    
+    // Slow fading component (changes over seconds)
+    // This simulates gradual ionospheric changes that affect signal strength
+    float slowFadePeriod = 5000.0f + (2000.0f * QRandomGenerator::global()->generateDouble()); // 5-7 seconds
+    float slowFadePhase = (currentTimeMs % static_cast<qint64>(slowFadePeriod)) / slowFadePeriod;
+    float slowFadeComponent = 0.5f * (1.0f + sin(2.0f * M_PI * slowFadePhase));
+    
+    // Fast fading/flutter component (rapid variations)
+    // This simulates multipath effects and rapid ionospheric changes
+    float fastFadePeriod = 100.0f + (300.0f * QRandomGenerator::global()->generateDouble()); // 100-400ms
+    float fastFadePhase = (currentTimeMs % static_cast<qint64>(fastFadePeriod)) / fastFadePeriod;
+    float fastFadeComponent = 0.3f * (1.0f + sin(2.0f * M_PI * fastFadePhase * 3.0f));
+    
+    // Random component for unpredictable variations
+    // This simulates short-term random effects like interference and atmospheric noise
+    float randomComponent = 0.2f * QRandomGenerator::global()->generateDouble();
+    
+    // Calculate base signal fading from the degradation (non-linear relationship)
+    float baseFading = std::pow(baseDegradation, 1.3f);
+    
+    // Occasional deep fades/dropouts (more likely with worse signals)
+    // This simulates complete signal loss that happens intermittently in HF propagation
+    bool deepFade = QRandomGenerator::global()->generateDouble() < (0.05f + (0.15f * baseDegradation));
+    float deepFadeFactor = deepFade ? (0.7f + (0.3f * QRandomGenerator::global()->generateDouble())) : 0.0f;
+    
+    // The API uses "packetLoss" to simulate signal fading/dropouts in HF audio
+    // Combine all components to simulate realistic fading behavior
+    float fadingFactor = baseFading * (0.5f + (0.3f * slowFadeComponent) + 
+                                  (0.1f * fastFadeComponent) + 
+                                  randomComponent + 
+                                  deepFadeFactor);
+    
+    // Ensure fading factor is within valid range
+    packetLoss = qBound(0.0f, fadingFactor, 0.95f); // Max 95% fading effect
+    
+    // Time variance in signal arrival (simulated using jitter parameter)
+    // In HF propagation, multipath effects cause signal components to arrive at slightly different times
+    jitter = baseDegradation * (0.4f + (0.2f * slowFadeComponent) + 
+                               (0.3f * fastFadeComponent) + 
+                               (0.1f * randomComponent));
+    jitter = qBound(0.0f, jitter, 0.9f);
+    
+    // Background noise level (atmospheric and band noise)
+    // Weaker signals have worse signal-to-noise ratio
+    noiseFactor = baseDegradation * (0.6f + (0.1f * slowFadeComponent) + 
+                                    (0.2f * fastFadeComponent) + 
+                                    (0.1f * randomComponent));
+    noiseFactor = qBound(0.0f, noiseFactor, 0.9f);
 }
 
 int HFBandSimulation::recommendBand(float distance) {

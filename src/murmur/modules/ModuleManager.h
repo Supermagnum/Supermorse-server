@@ -7,11 +7,16 @@
 #define MUMBLE_MURMUR_MODULEMANAGER_H_
 
 #include "IServerModule.h"
+#include "../ThreadPool.h"
 
 #include <QtCore/QObject>
 #include <QtCore/QHash>
 #include <QtCore/QString>
 #include <QtCore/QVariant>
+#include <QtCore/QFuture>
+
+#include <functional>
+#include <vector>
 
 class Server;
 
@@ -116,6 +121,45 @@ public:
      * @param data The event data
      */
     void broadcastEvent(const QString &eventName, const QVariant &data);
+    
+    /**
+     * @brief Send an event to all modules using parallel processing.
+     * 
+     * This method broadcasts events to all registered modules in parallel,
+     * utilizing multiple CPU cores for better performance.
+     * 
+     * @param eventName The name of the event
+     * @param data The event data
+     */
+    void broadcastEventParallel(const QString &eventName, const QVariant &data);
+    
+    /**
+     * @brief Execute a function on all modules in parallel.
+     * 
+     * This method runs the provided function on all modules in parallel,
+     * utilizing multiple CPU cores for better performance.
+     * 
+     * @param func The function to execute on each module
+     */
+    void executeOnAllModules(const std::function<void(IServerModule*)>& func);
+    
+    /**
+     * @brief Execute a function on a specific module.
+     * 
+     * This method runs the provided function on the specified module.
+     * 
+     * @param moduleName The name of the module
+     * @param func The function to execute
+     * @return True if the module was found and the function executed, false otherwise
+     */
+    bool executeOnModule(const QString &moduleName, const std::function<void(IServerModule*)>& func);
+    
+    /**
+     * @brief Get the thread pool used for parallel execution.
+     * 
+     * @return Pointer to the thread pool
+     */
+    ThreadPool* threadPool() const { return m_threadPool; }
 
 public slots:
     /**
@@ -159,6 +203,7 @@ signals:
 private:
     Server *m_server; // Pointer to the server instance
     QHash<QString, IServerModule*> m_modules; // Registry of modules
+    ThreadPool *m_threadPool; // Thread pool for parallel execution
 };
 
 #endif // MUMBLE_MURMUR_MODULEMANAGER_H_

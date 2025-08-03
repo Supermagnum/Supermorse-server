@@ -1,7 +1,5 @@
-/home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen/OKIHRWMZEG/moc_ModuleManager.cpp: /home/haaken/github-projects/Supermorse-server/src/murmur/modules/ModuleManager.h \
+/home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen/EWIEGA46WW/moc_ThreadPool.cpp: /home/haaken/github-projects/Supermorse-server/src/murmur/ThreadPool.h \
   /home/haaken/github-projects/Supermorse-server/build/src/murmur/murmur_autogen/moc_predefs.h \
-  /home/haaken/github-projects/Supermorse-server/src/murmur/ThreadPool.h \
-  /home/haaken/github-projects/Supermorse-server/src/murmur/modules/IServerModule.h \
   /usr/include/asm-generic/errno-base.h \
   /usr/include/asm-generic/errno.h \
   /usr/include/assert.h \
@@ -257,11 +255,7 @@
   /usr/include/x86_64-linux-gnu/gnu/stubs-64.h \
   /usr/include/x86_64-linux-gnu/gnu/stubs.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QDebug \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/QFuture \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/QHash \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/QString \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/QtGlobal \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qalgorithms.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qarraydata.h \
@@ -277,10 +271,7 @@
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontainertools_impl.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/qexception.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qflags.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/qfuture.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/qfutureinterface.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qgenericatomic.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobalstatic.h \
@@ -293,7 +284,6 @@
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qlogging.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qmetatype.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/qmutex.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qnamespace.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qnumeric.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h \
@@ -304,8 +294,6 @@
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qprocessordetection.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qrefcount.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qregexp.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/qresultstore.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtCore/qrunnable.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h \
   /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h \

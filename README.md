@@ -119,6 +119,45 @@ season=0
 update_interval=15
 ```
 
+### Performance Configuration
+The `[performance]` section contains settings for optimizing server performance across multiple CPU cores:
+
+```ini
+[performance]
+; Enable or disable multi-core processing
+; When enabled, the server will utilize multiple CPU cores for parallel processing
+; of computationally intensive tasks like propagation calculations and audio routing
+enable_multi_core=true
+
+; Maximum number of threads to use (0 = auto-detect, uses all available cores)
+; This can be useful to limit CPU usage on shared servers
+; For example, setting this to 4 would use at most 4 CPU cores even if more are available
+max_threads=0
+
+; Thread priority (0-7, where higher means higher priority)
+; 0 = Idle, 1 = Lowest, 2 = Low, 3 = Normal (default)
+; 4 = High, 5 = Highest, 6 = Time Critical, 7 = Inherit
+thread_priority=3
+```
+
+#### Hardware-Specific Recommendations
+
+For **Dell R720 servers**, it is recommended to set `max_threads=6` for optimal performance. This server model typically has multiple CPU cores, but testing has shown that limiting to 6 threads provides the best balance of performance and system responsiveness.
+
+Example configuration for Dell R720:
+```ini
+[performance]
+enable_multi_core=true
+max_threads=6
+thread_priority=4
+```
+
+Setting an appropriate thread count helps:
+- Prevent the server from consuming excessive system resources
+- Maintain responsive audio processing even under heavy load
+- Ensure smooth operation during propagation calculations
+- Leave resources available for other system processes
+
 ### Channel Configuration
 The server includes predefined channels for HF bands:
 

@@ -43,6 +43,7 @@ set(SOURCES
     AudioReceiverBuffer.cpp
     ChannelListenerManager.cpp
     DBWrapper.cpp
+    ThreadPool.cpp
     Timer.cpp
     VolumeAdjustment.cpp
     
@@ -65,6 +66,7 @@ set(HEADERS
     AudioReceiverBuffer.h
     ChannelListenerManager.h
     DBWrapper.h
+    ThreadPool.h
     Timer.h
     VolumeAdjustment.h
     

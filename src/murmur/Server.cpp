@@ -310,6 +310,7 @@ void Server::sendMessage(ServerUser *u, const QString &message) {
 
 void Server::sendTextMessage(Channel *cChannel, ServerUser *pUser, bool tree, const QString &text) {
     // Implementation for sending text messages
+    Q_UNUSED(cChannel);
     qWarning() << "Sending text message to" << (pUser ? pUser->qsName : "all users in channel") 
               << ":" << text
               << (tree ? "(including subchannels)" : "");
@@ -371,6 +372,7 @@ void Server::sslError(const QList<QSslError> &errors) {
 
 void Server::message(Mumble::Protocol::TCPMessageType type, const QByteArray &data, ServerUser *cCon) {
     // Process incoming message
+    Q_UNUSED(data);
     qWarning() << "Received message of type" << static_cast<int>(type) 
               << "from" << (cCon ? cCon->qsName : "unknown");
 }
@@ -546,12 +548,57 @@ void Server::updateHFBandPropagation() {
     // Update the HF band simulation
     m_pHFBandSimulation->updatePropagation();
     
-    // Update audio routing for all users
-    foreach(ServerUser *u1, qhUsers) {
-        if (u1->iId > 0) {
-            foreach(ServerUser *u2, qhUsers) {
-                if (u2->iId > 0 && u1 != u2) {
+    // Get the list of users with valid IDs
+    QList<ServerUser*> users;
+    foreach(ServerUser *u, qhUsers) {
+        if (u->iId > 0) {
+            users.append(u);
+        }
+    }
+    
+    // Process audio routing in parallel using the ModuleManager's thread pool
+    if (users.size() > 1 && m_moduleManager && m_moduleManager->threadPool()) {
+        qWarning() << "Using thread pool for parallel audio routing updates across" 
+                  << m_moduleManager->threadPool()->threadCount() << "cores";
+        
+        // Create a task for each user pair
+        std::vector<std::future<void>> futures;
+        futures.reserve(users.size() * (users.size() - 1) / 2);
+        
+        // For each user pair, create a task to update audio routing
+        for (int i = 0; i < users.size(); ++i) {
+            for (int j = i + 1; j < users.size(); ++j) {
+                ServerUser *u1 = users[i];
+                ServerUser *u2 = users[j];
+                
+                // Create a task that captures the user pair
+                auto task = [this, u1, u2]() {
                     updateAudioRouting(u1, u2);
+                    updateAudioRouting(u2, u1);
+                };
+                
+                // Enqueue the task
+                futures.push_back(m_moduleManager->threadPool()->enqueue(task));
+            }
+        }
+        
+        // Wait for all tasks to complete
+        for (auto& future : futures) {
+            future.wait();
+        }
+        
+        qWarning() << "Parallel audio routing updates completed";
+    } else {
+        // Fall back to sequential processing if thread pool is not available
+        qWarning() << "Using sequential audio routing updates";
+        
+        // Update audio routing for all users
+        foreach(ServerUser *u1, qhUsers) {
+            if (u1->iId > 0) {
+                foreach(ServerUser *u2, qhUsers) {
+                    if (u2->iId > 0 && u1 != u2) {
+                        updateAudioRouting(u1, u2);
+                    }
                 }
             }
         }
@@ -684,8 +731,81 @@ void Server::updateChannelLinks() {
     }
     qWarning() << "Open bands based on propagation:" << openBandsStr;
     
-    // In a real implementation, this would update the channel links
-    // based on the open bands
+    // Process channel updates in parallel if thread pool is available
+    if (m_moduleManager && m_moduleManager->threadPool()) {
+        qWarning() << "Using thread pool for parallel channel link updates";
+        
+        // Get all channels
+        QList<Channel*> channels = qhChannels.values();
+        
+        // Create a task for each channel
+        std::vector<std::future<void>> futures;
+        futures.reserve(channels.size());
+        
+        // For each channel, create a task to update its links
+        for (Channel* channel : channels) {
+            // Get the channel's band (if it represents a band)
+            bool ok;
+            int band = channel->qsName.toInt(&ok);
+            
+            if (ok) {
+                // Create a task that updates this channel's links
+                auto task = [this, channel, band, openBands]() {
+                    // Check if this band is open
+                    bool isOpen = openBands.contains(band);
+                    
+                    // Get current links
+                    QSet<Channel*> currentLinks;
+                    foreach (int linkedId, channel->qsPermLinks) {
+                        Channel* linked = qhChannels.value(linkedId);
+                        if (linked) {
+                            currentLinks.insert(linked);
+                        }
+                    }
+                    
+                    // Determine desired links based on propagation
+                    QSet<Channel*> desiredLinks;
+                    
+                    // Link open bands together
+                    if (isOpen) {
+                        foreach (int openBand, openBands) {
+                            if (band != openBand) {
+                                foreach (Channel* c, qhChannels.values()) {
+                                    bool cOk;
+                                    int cBand = c->qsName.toInt(&cOk);
+                                    if (cOk && cBand == openBand) {
+                                        desiredLinks.insert(c);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    // Update links if necessary
+                    if (currentLinks != desiredLinks) {
+                        // In a real implementation, this would update the channel links
+                        qWarning() << "Updating links for band" << band << "channel";
+                    }
+                };
+                
+                // Enqueue the task
+                futures.push_back(m_moduleManager->threadPool()->enqueue(task));
+            }
+        }
+        
+        // Wait for all tasks to complete
+        for (auto& future : futures) {
+            future.wait();
+        }
+        
+        qWarning() << "Parallel channel link updates completed";
+    } else {
+        // Fall back to sequential implementation
+        qWarning() << "Using sequential channel link updates";
+        
+        // In a sequential implementation, this would update the channel links
+        // based on the open bands
+    }
 }
 
 void Server::sendBandRecommendations(ServerUser *u, const QString &grid) {

@@ -9,6 +9,7 @@
 #include <QtCore/QDebug>
 #include <QtCore/QCryptographicHash>
 #include <QtCore/QDateTime>
+#include <QtCore/QRandomGenerator>
 
 UserDataModule::UserDataModule(QObject *parent)
     : IServerModule(parent)
@@ -81,6 +82,14 @@ int UserDataModule::authenticate(QString &name, const QString &password, int ses
                               bool bStrongCert, const QList<QSslCertificate> &certs) {
     QMutexLocker locker(&m_mutex);
     
+    // Mark unused parameters
+    Q_UNUSED(password);
+    Q_UNUSED(sessionId);
+    Q_UNUSED(emails);
+    Q_UNUSED(certhash);
+    Q_UNUSED(bStrongCert);
+    Q_UNUSED(certs);
+    
     // In a real implementation, this would query the database
     // and perform authentication
     
@@ -138,7 +147,7 @@ int UserDataModule::registerUser(const ServerUserInfo &userInfo) {
     // and return the new user ID
     
     // For this simplified version, we just generate a random ID
-    int userID = qrand() % 10000 + 1; // Random ID between 1 and 10000
+    int userID = QRandomGenerator::global()->bounded(10000) + 1; // Random ID between 1 and 10000
     
     // Add to caches
     m_userNameCache.insert(userID, userInfo.name);
@@ -392,6 +401,7 @@ bool UserDataModule::isValidUserID(int userID) {
 
 void UserDataModule::setTempGroups(int userid, int sessionId, Channel *cChannel, const QStringList &groups) {
     // In a real implementation, this would set temporary groups for the user
+    Q_UNUSED(sessionId);
     
     qDebug() << "UserDataModule: Set temporary groups for user ID" << userid
              << "in channel" << (cChannel ? cChannel->qsName : "null")

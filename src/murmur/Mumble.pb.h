@@ -771,12 +771,12 @@ public:
     bool IsInitialized() const { return true; }
     
     // Required overrides from google::protobuf::Message
-    bool ParseFromArray(const void* data, int size) { return true; }
-    bool SerializeToArray(void* data, int size) const { return true; }
+    bool ParseFromArray(const void* data, int size) { Q_UNUSED(data); Q_UNUSED(size); return true; }
+    bool SerializeToArray(void* data, int size) const { Q_UNUSED(data); Q_UNUSED(size); return true; }
     int ByteSize() const { return 0; }
-    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) {}
-    void CopyFrom(const google::protobuf::Message& from) {}
-    void MergeFrom(const google::protobuf::Message& from) {}
+    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) { Q_UNUSED(other); }
+    void CopyFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
+    void MergeFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
     
     void set_channel_id(uint32_t c) { channel_id = c; }
     void set_permissions(uint32_t p) { permissions = p; }
@@ -800,12 +800,12 @@ public:
     bool IsInitialized() const { return true; }
     
     // Required overrides from google::protobuf::Message
-    bool ParseFromArray(const void* data, int size) { return true; }
-    bool SerializeToArray(void* data, int size) const { return true; }
+    bool ParseFromArray(const void* data, int size) { Q_UNUSED(data); Q_UNUSED(size); return true; }
+    bool SerializeToArray(void* data, int size) const { Q_UNUSED(data); Q_UNUSED(size); return true; }
     int ByteSize() const { return 0; }
-    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) {}
-    void CopyFrom(const google::protobuf::Message& from) {}
-    void MergeFrom(const google::protobuf::Message& from) {}
+    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) { Q_UNUSED(other); }
+    void CopyFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
+    void MergeFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
     
     void set_alpha(int32_t a) { alpha = a; }
     void set_beta(int32_t b) { beta = b; }
@@ -828,12 +828,12 @@ public:
     bool IsInitialized() const { return true; }
     
     // Required overrides from google::protobuf::Message
-    bool ParseFromArray(const void* data, int size) { return true; }
-    bool SerializeToArray(void* data, int size) const { return true; }
+    bool ParseFromArray(const void* data, int size) { Q_UNUSED(data); Q_UNUSED(size); return true; }
+    bool SerializeToArray(void* data, int size) const { Q_UNUSED(data); Q_UNUSED(size); return true; }
     int ByteSize() const { return 0; }
-    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) {}
-    void CopyFrom(const google::protobuf::Message& from) {}
-    void MergeFrom(const google::protobuf::Message& from) {}
+    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) { Q_UNUSED(other); }
+    void CopyFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
+    void MergeFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
     
     void set_session(uint32_t s) { session = s; }
     void set_stats_only(bool so) { stats_only = so; }
@@ -855,12 +855,12 @@ public:
     bool IsInitialized() const { return true; }
     
     // Required overrides from google::protobuf::Message
-    bool ParseFromArray(const void* data, int size) { return true; }
-    bool SerializeToArray(void* data, int size) const { return true; }
+    bool ParseFromArray(const void* data, int size) { Q_UNUSED(data); Q_UNUSED(size); return true; }
+    bool SerializeToArray(void* data, int size) const { Q_UNUSED(data); Q_UNUSED(size); return true; }
     int ByteSize() const { return 0; }
-    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) {}
-    void CopyFrom(const google::protobuf::Message& from) {}
-    void MergeFrom(const google::protobuf::Message& from) {}
+    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) { Q_UNUSED(other); }
+    void CopyFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
+    void MergeFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
     
     void add_session_texture(uint32_t s) { session_texture.append(s); }
     void add_session_comment(uint32_t s) { session_comment.append(s); }
@@ -883,12 +883,12 @@ public:
     bool IsInitialized() const { return true; }
     
     // Required overrides from google::protobuf::Message
-    bool ParseFromArray(const void* data, int size) { return true; }
-    bool SerializeToArray(void* data, int size) const { return true; }
+    bool ParseFromArray(const void* data, int size) { Q_UNUSED(data); Q_UNUSED(size); return true; }
+    bool SerializeToArray(void* data, int size) const { Q_UNUSED(data); Q_UNUSED(size); return true; }
     int ByteSize() const { return 0; }
-    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) {}
-    void CopyFrom(const google::protobuf::Message& from) {}
-    void MergeFrom(const google::protobuf::Message& from) {}
+    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) { Q_UNUSED(other); }
+    void CopyFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
+    void MergeFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
     
     void set_max_bandwidth(uint32_t b) { max_bandwidth = b; }
     void set_welcome_text(const std::string &t) { welcome_text = t; }
@@ -911,12 +911,12 @@ public:
     bool IsInitialized() const { return true; }
     
     // Required overrides from google::protobuf::Message
-    bool ParseFromArray(const void* data, int size) { return true; }
-    bool SerializeToArray(void* data, int size) const { return true; }
+    bool ParseFromArray(const void* data, int size) { Q_UNUSED(data); Q_UNUSED(size); return true; }
+    bool SerializeToArray(void* data, int size) const { Q_UNUSED(data); Q_UNUSED(size); return true; }
     int ByteSize() const { return 0; }
-    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) {}
-    void CopyFrom(const google::protobuf::Message& from) {}
-    void MergeFrom(const google::protobuf::Message& from) {}
+    void CheckTypeAndMergeFrom(const google::protobuf::Message& other) { Q_UNUSED(other); }
+    void CopyFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
+    void MergeFrom(const google::protobuf::Message& from) { Q_UNUSED(from); }
     
     void set_version(uint32_t v) { version = v; }
     void set_positional(bool p) { positional = p; }

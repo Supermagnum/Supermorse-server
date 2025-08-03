@@ -3,6 +3,7 @@
 #include "EWIEGA46WW/moc_DBWrapper.cpp"
 #include "EWIEGA46WW/moc_Server.cpp"
 #include "EWIEGA46WW/moc_ServerApplication.cpp"
+#include "EWIEGA46WW/moc_ThreadPool.cpp"
 #include "EWIEGA46WW/moc_Timer.cpp"
 #include "OKIHRWMZEG/moc_HFBandSimulation.cpp"
 #include "OKIHRWMZEG/moc_IServerModule.cpp"

@@ -119,6 +119,10 @@ QString PropagationModule::description() const {
 QVariant PropagationModule::getSetting(const QString &key, const QVariant &defaultValue) const {
     QMutexLocker locker(const_cast<QRecursiveMutex*>(&m_mutex));
     
+    // Mark unused parameter - this is just for this utility method
+    // and doesn't affect the HF propagation simulation functionality
+    Q_UNUSED(key);
+    
     // In a real implementation, this would read from a settings store
     // For this simplified version, we just return the default value
     return defaultValue;

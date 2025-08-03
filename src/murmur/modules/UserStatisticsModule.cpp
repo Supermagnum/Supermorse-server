@@ -124,17 +124,70 @@ bool UserStatisticsModule::processUserStatsFile(const QString &userName, const Q
     QString userDirPath = m_statsDirectory.absolutePath() + "/" + userName;
     QString filePath = userDirPath + "/" + fileName;
     
-    // Write the file
+    // Process the content to ensure it follows the required format
+    QString content = QString::fromUtf8(fileData);
+    QStringList lines = content.split('\n', Qt::SkipEmptyParts);
+    
+    // Prepare formatted lines
+    QStringList formattedLines;
+    
+    // Always keep the header
+    QString header = lines.first();
+    formattedLines.append(header);
+    
+    // Process each data line to ensure proper format:
+    // username, characters learned, time per character, features unlocked, emailadress
+    for (int i = 1; i < lines.size(); i++) {
+        QStringList fields = lines[i].split(',');
+        
+        // Ensure we have at least 5 fields
+        while (fields.size() < 5) {
+            fields.append("");
+        }
+        
+        // Ensure character and time fields are properly formatted
+        // Example: Characters "K M" should have times "3 15"
+        QString charactersLearned = fields[1].trimmed();
+        QString timePerCharacter = fields[2].trimmed();
+        
+        if (!charactersLearned.isEmpty()) {
+            QStringList characters = charactersLearned.split(' ', Qt::SkipEmptyParts);
+            QStringList times = timePerCharacter.split(' ', Qt::SkipEmptyParts);
+            
+            // Adjust time entries to match character count if needed
+            while (times.size() < characters.size()) {
+                times.append("0"); // Default time value
+            }
+            
+            // Trim excess time entries
+            while (times.size() > characters.size()) {
+                times.removeLast();
+            }
+            
+            // Update the fields with properly formatted data
+            fields[1] = characters.join(" ");
+            fields[2] = times.join(" ");
+        }
+        
+        // Add the formatted line
+        formattedLines.append(fields.join(","));
+    }
+    
+    // Join all lines with newlines
+    QString formattedContent = formattedLines.join("\n");
+    QByteArray formattedData = formattedContent.toUtf8();
+    
+    // Write the formatted file
     QFile file(filePath);
     if (!file.open(QIODevice::WriteOnly)) {
         qWarning() << "UserStatisticsModule: Failed to open file for writing:" << filePath;
         return false;
     }
     
-    qint64 bytesWritten = file.write(fileData);
+    qint64 bytesWritten = file.write(formattedData);
     file.close();
     
-    if (bytesWritten != fileData.size()) {
+    if (bytesWritten != formattedData.size()) {
         qWarning() << "UserStatisticsModule: Failed to write complete file content to" << filePath;
         return false;
     }
@@ -219,11 +272,46 @@ bool UserStatisticsModule::validateStatsFile(const QByteArray &fileData) {
         return false;
     }
     
-    // Check if the first line has expected headers
+    // Check if the first line has required headers for the format:
+    // username, characters learned, time per character, features unlocked, emailadress
     QString header = lines.first().toLower();
-    if (!header.contains("userid") || !header.contains("username")) {
+    
+    if (!header.contains("username") || 
+        !header.contains("characters learned") || 
+        !header.contains("time per character") || 
+        !header.contains("features unlocked") || 
+        !header.contains("emailadress")) {
+        
         qWarning() << "UserStatisticsModule: Missing required headers in CSV file";
         return false;
+    }
+    
+    // For data lines, verify format matches expected structure
+    if (lines.size() > 1) {
+        for (int i = 1; i < lines.size(); i++) {
+            QStringList fields = lines[i].split(',');
+            
+            // Check we have enough fields
+            if (fields.size() < 5) {
+                qWarning() << "UserStatisticsModule: Line" << i+1 << "has fewer fields than required";
+                return false;
+            }
+            
+            // Verify characters learned and time per character consistency
+            QString charactersLearned = fields[1].trimmed();
+            QString timePerCharacter = fields[2].trimmed();
+            
+            if (!charactersLearned.isEmpty()) {
+                QStringList characters = charactersLearned.split(' ', Qt::SkipEmptyParts);
+                QStringList times = timePerCharacter.split(' ', Qt::SkipEmptyParts);
+                
+                if (characters.size() != times.size()) {
+                    qWarning() << "UserStatisticsModule: Line" << i+1 
+                               << "has mismatched characters and time values count";
+                    return false;
+                }
+            }
+        }
     }
     
     return true;

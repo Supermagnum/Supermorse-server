@@ -14,6 +14,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/murmur.dir/Server.cpp.o.d"
   "CMakeFiles/murmur.dir/ServerApplication.cpp.o"
   "CMakeFiles/murmur.dir/ServerApplication.cpp.o.d"
+  "CMakeFiles/murmur.dir/ThreadPool.cpp.o"
+  "CMakeFiles/murmur.dir/ThreadPool.cpp.o.d"
   "CMakeFiles/murmur.dir/Timer.cpp.o"
   "CMakeFiles/murmur.dir/Timer.cpp.o.d"
   "CMakeFiles/murmur.dir/VolumeAdjustment.cpp.o"
